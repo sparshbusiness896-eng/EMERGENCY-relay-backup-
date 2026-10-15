@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Triage Relay | Emergency Trauma Dispatch & Smart Hospital Matching Platform</title>
+  <meta name="description" content="Next-generation clinical decision-support system connecting accident scenes to the best-matched hospital emergency departments in real time.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Leaflet Interactive Maps CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body class="theme-dark">
+
+  <!-- TOP APPLICATION NAVBAR -->
+  <header class="app-header">
+    <div class="brand-section">
+      <img src="assets/logo.png" alt="Triage Relay Logo" class="brand-logo" id="headerLogo">
+      <div class="brand-info">
+        <h1 class="brand-title">Triage Relay</h1>
+        <span class="brand-subtitle">Emergency Trauma Dispatch &amp; Smart Hospital Matching</span>
+      </div>
+    </div>
+
+    <!-- Active Navigation Tabs -->
+    <nav class="nav-tabs" aria-label="Module Navigation">
+      <button class="nav-tab active" data-target="view-paramedic" id="tabParamedic">
+        <span class="tab-icon">🚑</span> Paramedic Intake
+      </button>
+      <button class="nav-tab" data-target="view-recommendations" id="tabRecommendations">
+        <span class="tab-icon">🏥</span> Recommendations
+      </button>
+      <button class="nav-tab" data-target="view-er" id="tabEr">
+        <span class="tab-icon">🚨</span> ER Pre-Alert <span class="badge-alert-count" id="erAlertCount">1</span>
+      </button>
+      <button class="nav-tab" data-target="view-navigation" id="tabNav">
+        <span class="tab-icon">🧭</span> Live Navigation
+      </button>
+      <button class="nav-tab" data-target="view-dispatch" id="tabDispatch">
+        <span class="tab-icon">📡</span> 108 Dispatch
+      </button>
+    </nav>
+
+    <!-- Header System Badges -->
+    <div class="header-status">
+      <div class="status-chip online" id="connectionBadge">
+        <span class="pulse-dot"></span> <span id="connectionText">SYSTEM ONLINE</span>
+      </div>
+      <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle audio sirens">
+        🔔 Sound: <span id="audioStatusText">ARMED</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- BACKEND CONNECTIVITY ERROR BANNER -->
+  <aside class="backend-error-banner hidden" id="backendErrorBanner" role="alert">
+    <div class="beb-content">
+      <span class="beb-icon">⚠️</span>
+      <div class="beb-text">
+        <strong id="backendErrorTitle">Backend Server Not Connected</strong>
+        <span id="backendErrorMessage">Cannot reach the Triage API. Confirm PostgreSQL is running, then run: <code>npm start</code>.</span>
+      </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline" id="btnRetryBackend">Retry Connection ↻</button>
+  </aside>
+
+  <!-- URGENT ALARM BANNER (Triggered on incoming ESI 1 or ESI 2 pre-alert) -->
+  <aside class="urgent-prealert-banner hidden" id="urgentBanner" role="alert">
+    <div class="urgent-banner-inner">
+      <div class="urgent-pulse-indicator">⚠️</div>
+      <div class="urgent-content">
+        <span class="urgent-label">CRITICAL INCOMING PRE-ALERT (ESI <span id="bannerEsi">2</span>)</span>
+        <strong class="urgent-headline" id="bannerHeadline">34M High-Speed Collision • Severe Head Injury &amp; Major Bleeding</strong>
+        <span class="urgent-eta">Ambulance 108 Alpha • ETA: <span id="bannerEta">08:24</span> min</span>
+      </div>
+      <div class="urgent-actions">
+        <button class="btn btn-ack" id="btnAckBanner">ACKNOWLEDGE &amp; SILENCE</button>
+        <button class="btn btn-view" id="btnViewBanner">VIEW DOSSIER</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <main class="main-viewport">
+
+    <!-- =============================================================== -->
+    <!-- VIEW 1: PARAMEDIC INTAKE MODULE (02_PARAMEDIC_INTAKE_MODULE.md)  -->
+    <!-- =============================================================== -->
+    <section class="view-panel active" id="view-paramedic">
+      <div class="panel-sticky-bar">
+        <div class="incident-meta">
+          <span class="chip chip-incident">INCIDENT: <strong id="paramedicIncidentId">#inc_01HZX990</strong></span>
+          <span class="chip chip-unit">UNIT: <strong>Ambulance 108 Alpha (ALS)</strong></span>
+          <span class="chip chip-timer">⏱️ SCENE TIME: <span id="sceneTimer">14:32</span></span>
+        </div>
+        <div class="panel-quick-actions">
+          <button class="btn btn-critical-shortcut" id="btnCriticalShortcut">
+            ⚡ CRITICAL — GET RECOMMENDATIONS NOW
+          </button>
+        </div>
+      </div>
+
+      <div class="intake-grid">
+        <!-- LEFT COLUMN: Patient & Vitals -->
+        <div class="intake-col">
+
+          <!-- 1. Patient Demographics Card -->
+          <div class="card card-intake">
+            <div class="card-header">
+              <h2>1. Patient Demographics</h2>
+              <span class="card-hint">Optional • Rapid Intake</span>
+            </div>
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="patientName">Patient Name</label>
+                <input type="text" id="patientName" class="form-control" placeholder="Unknown / Unidentified" value="Rohan Sharma">
+              </div>
+              <div class="form-group w-80">
+                <label for="patientAge">Age (Years) *</label>
+                <input type="number" id="patientAge" class="form-control" min="0" max="120" value="34">
+              </div>
+              <div class="form-group w-100">
+                <label for="patientSex">Sex</label>
+                <select id="patientSex" class="form-control">
+                  <option value="MALE" selected>MALE</option>
+                  <option value="FEMALE">FEMALE</option>
+                  <option value="OTHER">OTHER</option>
+                  <option value="UNKNOWN">UNKNOWN</option>
+                </select>
+              </div>
+            </div>
+            <div class="pediatric-badge-container" id="pediatricContainer" style="display: none;">
+              <span class="badge badge-pediatric">👶 PEDIATRIC PATIENT DETECTED (Age &lt; 16) — Pediatric Trauma Protocol Active</span>
+            </div>
+          </div>
+
+          <!-- 2. Vitals Grid (Gloved tactile input) -->
+          <div class="card card-intake">
+            <div class="card-header">
+              <h2>2. Vital Signs Telemetry</h2>
+              <span class="card-hint">Touch Steppers • Realtime Validation</span>
+            </div>
+
+            <!-- Soft Warnings Banner -->
+            <div class="soft-warnings-box" id="vitalsWarningsBox">
+              <!-- Dynamically populated warnings (e.g. SpO2 < 90, Hypotension) -->
+            </div>
+
+            <div class="vitals-input-matrix">
+              <!-- Systolic BP -->
+              <div class="vital-input-card">
+                <span class="vital-name">Systolic BP</span>
+                <span class="vital-unit">mmHg (SBP)</span>
+                <div class="stepper-group">
+                  <button type="button" class="btn-step" data-target="vitalSbp" data-delta="-5">−</button>
+                  <input type="number" id="vitalSbp" class="stepper-val" value="92" min="0" max="300">
+                  <button type="button" class="btn-step" data-target="vitalSbp" data-delta="5">+</button>
+                </div>
+              </div>
+
+              <!-- Diastolic BP -->
+              <div class="vital-input-card">
+                <span class="vital-name">Diastolic BP</span>
+                <span class="vital-unit">mmHg (DBP)</span>
+                <div class="stepper-group">
+                  <button type="button" class="btn-step" data-target="vitalDbp" data-delta="-5">−</button>
+                  <input type="number" id="vitalDbp" class="stepper-val" value="60" min="0" max="200">
+                  <button type="button" class="btn-step" data-target="vitalDbp" data-delta="5">+</button>
+                </div>
+              </div>
+
+              <!-- Heart Rate -->
+              <div class="vital-input-card">
+                <span class="vital-name">Heart Rate</span>
+                <span class="vital-unit">beats / min (HR)</span>
+                <div class="stepper-group">
+                  <button type="button" class="btn-step" data-target="vitalHr" data-delta="-5">−</button>
+                  <input type="number" id="vitalHr" class="stepper-val" value="118" min="0" max="300">
+                  <button type="button" class="btn-step" data-target="vitalHr" data-delta="5">+</button>
+                </div>
+              </div>
+
+              <!-- Respiratory Rate -->
+              <div class="vital-input-card">
+                <span class="vital-name">Respiratory Rate</span>
+                <span class="vital-unit">breaths / min (RR)</span>
+                <div class="stepper-group">
+                  <button type="button" class="btn-step" data-target="vitalRr" data-delta="-2">−</button>
+                  <input type="number" id="vitalRr" class="stepper-val" value="24" min="0" max="80">
+                  <button type="button" class="btn-step" data-target="vitalRr" data-delta="2">+</button>
+                </div>
+              </div>
+
+              <!-- SpO2 -->
+              <div class="vital-input-card">
+                <span class="vital-name">SpO2 Oxygen</span>
+                <span class="vital-unit">% Saturation</span>
+                <div class="stepper-group">
+                  <button type="button" class="btn-step" data-target="vitalSpo2" data-delta="-1">−</button>
+                  <input type="number" id="vitalSpo2" class="stepper-val" value="93" min="0" max="100">
+                  <button type="button" class="btn-step" data-target="vitalSpo2" data-delta="1">+</button>
+                </div>
+              </div>
+
+              <!-- Temperature -->
+              <div class="vital-input-card">
+                <span class="vital-name">Temperature</span>
+                <span class="vital-unit">°Celsius</span>
+                <div class="stepper-group">
+                  <button type="button" class="btn-step" data-target="vitalTemp" data-delta="-0.2">−</button>
+                  <input type="number" id="vitalTemp" class="stepper-val" value="36.4" step="0.1" min="25" max="45">
+                  <button type="button" class="btn-step" data-target="vitalTemp" data-delta="0.2">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. GCS Selector Card (File 02 Section 5.1) -->
+          <div class="card card-intake">
+            <div class="card-header">
+              <h2>3. Glasgow Coma Scale (GCS)</h2>
+              <span class="gcs-live-score" id="gcsScoreBadge">Total GCS: <strong>9 / 15</strong> (Moderate Deficit)</span>
+            </div>
+
+            <!-- Eye Opening (1-4) -->
+            <div class="gcs-segment-group">
+              <label class="gcs-label">Eye Opening (1-4)</label>
+              <div class="segmented-control" id="gcsEyeControl">
+                <button type="button" class="seg-btn" data-val="4">4 Spontaneous</button>
+                <button type="button" class="seg-btn active" data-val="3">3 To Voice</button>
+                <button type="button" class="seg-btn" data-val="2">2 To Pain</button>
+                <button type="button" class="seg-btn" data-val="1">1 None</button>
+              </div>
+            </div>
+
+            <!-- Verbal Response (1-5) -->
+            <div class="gcs-segment-group">
+              <label class="gcs-label">Verbal Response (1-5)</label>
+              <div class="segmented-control" id="gcsVerbalControl">
+                <button type="button" class="seg-btn" data-val="5">5 Oriented</button>
+                <button type="button" class="seg-btn" data-val="4">4 Confused</button>
+                <button type="button" class="seg-btn active" data-val="3">3 Inappropriate</button>
+                <button type="button" class="seg-btn" data-val="2">2 Sounds</button>
+                <button type="button" class="seg-btn" data-val="1">1 None</button>
+              </div>
+            </div>
+
+            <!-- Motor Response (1-6) -->
+            <div class="gcs-segment-group">
+              <label class="gcs-label">Motor Response (1-6)</label>
+              <div class="segmented-control" id="gcsMotorControl">
+                <button type="button" class="seg-btn" data-val="6">6 Obeys</button>
+                <button type="button" class="seg-btn" data-val="5">5 Localizes</button>
+                <button type="button" class="seg-btn" data-val="4">4 Withdraws</button>
+                <button type="button" class="seg-btn active" data-val="3">3 Decorticate</button>
+                <button type="button" class="seg-btn" data-val="2">2 Decerebrate</button>
+                <button type="button" class="seg-btn" data-val="1">1 None</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Trauma Types, Acuity, Notes & CTA -->
+        <div class="intake-col">
+
+          <!-- 4. Trauma & Condition Chips (File 02 Section 4) -->
+          <div class="card card-intake">
+            <div class="card-header">
+              <h2>4. Trauma / Suspected Condition</h2>
+              <span class="card-hint">Multi-Select • Min 1 Required</span>
+            </div>
+            <div class="trauma-chips-grid" id="traumaChipsContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- 5. Real-Time Clinical Acuity HUD (File 02 Section 5.2 & 5.3) -->
+          <div class="card card-intake card-acuity-hud">
+            <div class="card-header">
+              <h2>5. Clinical Acuity &amp; Triage Calculator</h2>
+              <span class="badge badge-ai">Decision-Support</span>
+            </div>
+
+            <div class="acuity-metrics-row">
+              <div class="acuity-box">
+                <span class="acuity-lbl">RTS Triage</span>
+                <span class="acuity-val" id="hudRtsTriage">9 / 12</span>
+                <span class="acuity-note alert" id="hudRtsAlert">⚠️ Trauma Center Indicated (&le; 11)</span>
+              </div>
+              <div class="acuity-box">
+                <span class="acuity-lbl">RTS Weighted</span>
+                <span class="acuity-val" id="hudRtsWeighted">6.90</span>
+                <span class="acuity-note">Physiological score</span>
+              </div>
+              <div class="acuity-box esi-box" id="hudEsiBox">
+                <span class="acuity-lbl">Suggested Acuity</span>
+                <span class="acuity-val esi-level-2" id="hudEsiLevel">ESI 2</span>
+                <span class="acuity-note" id="hudEsiReason">Emergent (GCS 9, Tachycardia)</span>
+              </div>
+            </div>
+
+            <div class="esi-override-bar">
+              <label for="overrideEsiSelect">Paramedic Final ESI Assignment:</label>
+              <select id="overrideEsiSelect" class="form-control select-esi">
+                <option value="1">ESI 1 - Resuscitation / Immediate</option>
+                <option value="2" selected>ESI 2 - Emergent / High Risk</option>
+                <option value="3">ESI 3 - Urgent / Stable</option>
+                <option value="4">ESI 4 - Less Urgent</option>
+                <option value="5">ESI 5 - Non-Urgent</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 6. Mechanism & Notes -->
+          <div class="card card-intake">
+            <div class="card-header">
+              <h2>6. Mechanism of Injury &amp; Handover Notes</h2>
+            </div>
+            <div class="form-group">
+              <label for="injuryMechanism">Mechanism of Injury (max 300 chars)</label>
+              <input type="text" id="injuryMechanism" class="form-control" placeholder="e.g. High-speed motorcycle collision vs truck..." value="Two-wheeler vs truck, helmet dislodged">
+            </div>
+            <div class="form-group">
+              <label for="paramedicNotes">Clinical Interventions &amp; Transport Notes</label>
+              <textarea id="paramedicNotes" class="form-control" rows="3" placeholder="IV access, immobilisation, oxygen therapy...">IV x2 established, cervical collar placed, bleeding packed.</textarea>
+            </div>
+          </div>
+
+          <!-- Sticky Action Panel -->
+          <div class="intake-actions-bar">
+            <button type="button" class="btn btn-secondary" id="btnSaveDraft">
+              💾 Save Draft (Offline Safe)
+            </button>
+            <button type="button" class="btn btn-primary btn-large pulse-glow" id="btnGetRecommendations">
+              Find Best Hospitals ▶
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- VIEW 2: SMART RECOMMENDATIONS MODULE (03_RECOMMENDATION_ENGINE.md)-->
+    <!-- =============================================================== -->
+    <section class="view-panel" id="view-recommendations">
+      <div class="recommendations-container">
+
+        <!-- Header Rationale & Requirement Summary -->
+        <div class="requirements-summary-card" id="requirementsCard">
+          <div class="req-title-row">
+            <div class="req-title-left">
+              <h2>🎯 Derived Clinical Requirements</h2>
+              <span class="req-incident-tag">Calculated for Incident <strong id="recIncidentId">#inc_01HZX990</strong></span>
+            </div>
+            <div class="req-tags-right">
+              <div class="req-badge-group">
+                <span class="req-badge-label">Target Bed Type:</span>
+                <span class="req-badge-val" id="reqBedType">ICU / TRAUMA</span>
+              </div>
+              <div class="req-badge-group">
+                <span class="req-badge-label">Max Transit Window:</span>
+                <span class="req-badge-val" id="reqMaxEta">45 Minutes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="req-capabilities-list">
+            <span class="req-cap-title">Mandatory Capabilities:</span>
+            <div class="cap-pill-group" id="reqMandatoryCaps">
+              <span class="cap-pill required">NEUROSURGERY</span>
+              <span class="cap-pill required">CT_24X7</span>
+              <span class="cap-pill required">BLOOD_BANK</span>
+              <span class="cap-pill required">TRAUMA_CENTER_L1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nearest Stabilization ED Warning (Fallback Rule 3) -->
+        <div class="fallback-callout hidden" id="fallbackStabilizationBox">
+          <div class="fallback-icon">⚠️</div>
+          <div class="fallback-content">
+            <strong>CRITICAL STABILIZATION RECOMMENDATION:</strong>
+            <p id="fallbackStabilizationText">Patient is ESI 1 and primary center ETA exceeds 20 minutes. Consider immediate airway and hemodynamic stabilization at nearest community emergency department.</p>
+          </div>
+          <button class="btn btn-warning-sm" id="btnSelectStabilization">Select Stabilization Center</button>
+        </div>
+
+        <!-- Ranked Hospital Cards List -->
+        <div class="hospital-rankings-list" id="hospitalRankingsList">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- VIEW 3: ER PRE-ALERT DASHBOARD MODULE (04_ER_DASHBOARD_MODULE.md)-->
+    <!-- =============================================================== -->
+    <section class="view-panel" id="view-er">
+      <div class="er-dashboard-layout">
+
+        <!-- Top Hospital Sub-Header -->
+        <header class="er-sub-header">
+          <div class="er-hospital-picker">
+            <label for="erHospitalSelect">Destination Facility:</label>
+            <select id="erHospitalSelect" class="form-control er-select">
+              <option value="hos_001" selected>Apex Level-1 Trauma Hospital (Central Sector)</option>
+              <option value="hos_002">Metro Heart &amp; Vascular Institute</option>
+              <option value="hos_003">Regional Neuro &amp; Stroke Care Hospital</option>
+              <option value="hos_004">Children &amp; Maternity Medical Center</option>
+              <option value="hos_005">St. Jude Burn &amp; Trauma Center</option>
+            </select>
+          </div>
+
+          <div class="er-beds-counters" id="erBedsCounters">
+            <div class="bed-chip er-chip"><span class="chip-k">ER Free:</span> <strong id="erBedCount">8</strong></div>
+            <div class="bed-chip icu-chip"><span class="chip-k">ICU Free:</span> <strong id="icuBedCount">4</strong></div>
+            <div class="bed-chip trauma-chip"><span class="chip-k">Trauma Free:</span> <strong id="traumaBedCount">2</strong></div>
+          </div>
+
+          <div class="er-header-controls">
+            <button class="btn btn-sm btn-outline" id="btnEditBeds">🛏️ Adjust Beds</button>
+            <button class="btn btn-sm btn-outline" id="btnTestChime">🔊 Test Chime</button>
+          </div>
+        </header>
+
+        <!-- 3-COLUMN ER DASHBOARD GRID -->
+        <div class="er-columns-grid">
+
+          <!-- COLUMN 1 (30%): Incoming Patient Queue -->
+          <aside class="er-col er-queue-col">
+            <div class="col-head">
+              <h3>INCOMING PATIENTS (<span id="queueCount">1</span>)</h3>
+              <span class="col-sub">Sorted by Acuity &amp; ETA</span>
+            </div>
+            <div class="incoming-cards-stream" id="incomingQueueStream">
+              <!-- Dynamically populated queue card -->
+            </div>
+          </aside>
+
+          <!-- COLUMN 2 (45%): Selected Patient Dossier -->
+          <article class="er-col er-detail-col" id="erPatientDossier">
+            <div class="dossier-card">
+              <!-- Dossier Top Header -->
+              <div class="dossier-top">
+                <div class="dossier-patient-main">
+                  <div class="esi-large-badge esi-2" id="dossierEsiBadge">ESI 2</div>
+                  <div class="dossier-titles">
+                    <h3 id="dossierPatientName">Rohan Sharma (34M)</h3>
+                    <p class="dossier-condition" id="dossierCondition">Severe Head Injury • Major Bleeding • Motor Vehicle Collision</p>
+                  </div>
+                </div>
+                <div class="dossier-countdown-box">
+                  <span class="cd-label">ESTIMATED ARRIVAL IN</span>
+                  <span class="cd-timer countdown-active" id="dossierEtaCountdown">08:14</span>
+                  <span class="cd-sub" id="dossierAmbulanceCallSign">Ambulance 108 Alpha</span>
+                </div>
+              </div>
+
+              <!-- Vitals Tiles with Trend Arrows (File 04 Section 2) -->
+              <div class="dossier-vitals-row">
+                <div class="d-vital-card">
+                  <span class="dv-label">Blood Pressure</span>
+                  <span class="dv-val"><strong id="dvBp">92/60</strong> <span class="trend-up">↗</span></span>
+                  <span class="dv-status normal">Borderline</span>
+                </div>
+                <div class="d-vital-card">
+                  <span class="dv-label">Heart Rate</span>
+                  <span class="dv-val"><strong id="dvHr">118</strong> <span class="trend-down">↘</span></span>
+                  <span class="dv-status warning">Tachycardia</span>
+                </div>
+                <div class="d-vital-card">
+                  <span class="dv-label">Respiratory Rate</span>
+                  <span class="dv-val"><strong id="dvRr">24</strong> <span class="trend-neutral">→</span></span>
+                  <span class="dv-status normal">Elevated</span>
+                </div>
+                <div class="d-vital-card">
+                  <span class="dv-label">SpO2 Saturation</span>
+                  <span class="dv-val"><strong id="dvSpo2">93%</strong> <span class="trend-up">↗</span></span>
+                  <span class="dv-status warning">On Oxygen</span>
+                </div>
+                <div class="d-vital-card">
+                  <span class="dv-label">GCS Total</span>
+                  <span class="dv-val"><strong id="dvGcs">9 / 15</strong> <span class="trend-neutral">→</span></span>
+                  <span class="dv-status alert">Moderate Deficit</span>
+                </div>
+                <div class="d-vital-card">
+                  <span class="dv-label">Temperature</span>
+                  <span class="dv-val"><strong id="dvTemp">36.4°C</strong></span>
+                  <span class="dv-status normal">Normothermic</span>
+                </div>
+              </div>
+
+              <!-- Vitals Trend Canvas (Sparkline Simulation) -->
+              <div class="vitals-chart-box">
+                <div class="chart-header">
+                  <span>30-Minute Vitals Trend Telemetry (BP &amp; Heart Rate)</span>
+                  <span class="live-pulse-txt" id="liveStreamBadge">● Streaming via Server-Sent Events (SSE)</span>
+                </div>
+                <canvas id="vitalsChartCanvas" width="540" height="110" class="vitals-canvas"></canvas>
+              </div>
+
+              <!-- Trauma Resource Readiness Checklist -->
+              <div class="resources-checklist-card">
+                <div class="res-head">
+                  <h4>Trauma Bay Resource Readiness (One-Tap Pre-Alert Confirmation)</h4>
+                </div>
+                <div class="resources-grid" id="resourcesGrid">
+                  <button type="button" class="res-toggle-btn ready" data-res="TRAUMA_TEAM">
+                    <span class="res-icon">👨‍⚕️</span>
+                    <span class="res-name">Trauma Team Alpha</span>
+                    <span class="res-status-chip">STANDBY READY</span>
+                  </button>
+                  <button type="button" class="res-toggle-btn ready" data-res="CT_SCAN">
+                    <span class="res-icon">🔬</span>
+                    <span class="res-name">CT Trauma Bay (24x7)</span>
+                    <span class="res-status-chip">CLEARED</span>
+                  </button>
+                  <button type="button" class="res-toggle-btn ready" data-res="BLOOD_BANK">
+                    <span class="res-icon">🩸</span>
+                    <span class="res-name">O-Neg Uncrossed Blood (4u)</span>
+                    <span class="res-status-chip">DISPATCHED</span>
+                  </button>
+                  <button type="button" class="res-toggle-btn pending" data-res="OR_SUITE">
+                    <span class="res-icon">🏥</span>
+                    <span class="res-name">Emergency OR Suite 1</span>
+                    <span class="res-status-chip">PREPARING</span>
+                  </button>
+                  <button type="button" class="res-toggle-btn ready" data-res="NEUROSURGEON">
+                    <span class="res-icon">🧠</span>
+                    <span class="res-name">On-Call Neurosurgeon</span>
+                    <span class="res-status-chip">PAGED &amp; EN ROUTE</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Clinical Notes & Paramedic Voice Memo -->
+              <div class="dossier-notes-box">
+                <strong>Paramedic Handover Audio / Text Note:</strong>
+                <p id="dossierParamedicNote">"Patient sustained high-energy blunt trauma to head. No intubation performed; collar and IV in place. SBP stabilizing around 92 mmHg. Ready for direct CT."</p>
+              </div>
+
+              <!-- Footer Actions -->
+              <div class="dossier-actions-bar">
+                <button class="btn btn-success" id="btnAckDossier">
+                  ✓ Acknowledge Pre-Alert
+                </button>
+                <button class="btn btn-primary" id="btnAssignBedModal">
+                  🛏️ Assign Trauma Bay 2
+                </button>
+                <button class="btn btn-outline" id="btnRequestDiversion">
+                  ⚠️ Request Diversion
+                </button>
+                <button class="btn btn-secondary" id="btnMarkArrived">
+                  🏁 Mark Ambulance Arrived
+                </button>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- COLUMN 3 (25%): Live Ambulance Radar & Telemetry -->
+          <aside class="er-col er-radar-col">
+            <div class="col-head">
+              <h3>LIVE AMBULANCE TELEMETRY</h3>
+              <span class="col-sub">High-Accuracy GPS Stream</span>
+            </div>
+
+            <!-- Mini Map Canvas -->
+            <div class="radar-map-wrapper">
+              <canvas id="miniRadarCanvas" width="320" height="260" class="radar-canvas"></canvas>
+              <div class="radar-overlay-data">
+                <span class="rod-speed">Speed: <strong id="rodSpeed">44 km/h</strong></span>
+                <span class="rod-heading">Heading: <strong id="rodHeading">NE 42°</strong></span>
+                <span class="rod-dist">Dist: <strong id="rodDist">3.2 km</strong></span>
+              </div>
+            </div>
+
+            <!-- Bed Inventory Quick Editor -->
+            <div class="card bed-editor-card">
+              <div class="card-header">
+                <h4>Bed Inventory Live Controls</h4>
+              </div>
+              <div class="bed-stepper-row">
+                <span class="bed-stepper-lbl">ER Beds:</span>
+                <div class="stepper-mini">
+                  <button type="button" class="btn-mini-step" data-type="ER" data-delta="-1">−</button>
+                  <span class="mini-val" id="miniValEr">8</span>
+                  <button type="button" class="btn-mini-step" data-type="ER" data-delta="1">+</button>
+                </div>
+              </div>
+              <div class="bed-stepper-row">
+                <span class="bed-stepper-lbl">ICU Beds:</span>
+                <div class="stepper-mini">
+                  <button type="button" class="btn-mini-step" data-type="ICU" data-delta="-1">−</button>
+                  <span class="mini-val" id="miniValIcu">4</span>
+                  <button type="button" class="btn-mini-step" data-type="ICU" data-delta="1">+</button>
+                </div>
+              </div>
+              <div class="bed-stepper-row">
+                <span class="bed-stepper-lbl">Trauma Bays:</span>
+                <div class="stepper-mini">
+                  <button type="button" class="btn-mini-step" data-type="TRAUMA" data-delta="-1">−</button>
+                  <span class="mini-val" id="miniValTrauma">2</span>
+                  <button type="button" class="btn-mini-step" data-type="TRAUMA" data-delta="1">+</button>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- VIEW 4: LIVE NAVIGATION MODULE (05_NAVIGATION_MODULE.md)        -->
+    <!-- =============================================================== -->
+    <section class="view-panel" id="view-navigation">
+      <div class="nav-cockpit-layout">
+
+        <!-- Top Maneuver Banner (File 05 Section 2) -->
+        <div class="maneuver-banner">
+          <div class="maneuver-icon-box" id="maneuverIcon">↗</div>
+          <div class="maneuver-details">
+            <span class="maneuver-dist" id="maneuverDistance">In 450 meters</span>
+            <h2 class="maneuver-street" id="maneuverInstruction">Turn slightly right onto Health Express Flyover</h2>
+          </div>
+          <div class="maneuver-hospital-badge">
+            <span>DESTINATION:</span>
+            <strong id="navDestName">Apex Trauma Hospital</strong>
+          </div>
+        </div>
+
+        <!-- Interactive Real-World Map (Leaflet Dark Matter) -->
+        <div class="nav-map-container" style="position: relative; height: 520px; border-radius: var(--radius-xl); overflow: hidden;">
+          <div id="liveNavigationMap" class="real-map-view" style="width: 100%; height: 100%;"></div>
+
+          <!-- Floating Map HUD Controls -->
+          <div class="map-floating-hud">
+            <button class="hud-pill-btn" id="btnRecenterMap" title="Recenter on Ambulance">🎯 Recenter</button>
+            <button class="hud-pill-btn" id="btnFitAllHospitals" title="Fit all hospitals in view">🗺️ View All Hospitals</button>
+            <button class="hud-pill-btn" id="btnSimulateDrive" title="Toggle Ambulance Drive Tracking">🏎️ Start / Pause Drive</button>
+            <button class="hud-pill-btn" id="btnReportBlockage" title="Trigger Automated Traffic Re-route">🚧 Report Blockage</button>
+          </div>
+        </div>
+
+        <!-- Bottom Sheet Telemetry HUD -->
+        <div class="nav-bottom-sheet">
+          <div class="sheet-metric">
+            <span class="sm-label">ESTIMATED TIME</span>
+            <span class="sm-val" id="navEtaValue">08:14</span>
+            <span class="sm-sub">Live Traffic</span>
+          </div>
+          <div class="sheet-metric">
+            <span class="sm-label">DISTANCE</span>
+            <span class="sm-val" id="navDistanceValue">4.8 km</span>
+            <span class="sm-sub">Optimal Emergency Path</span>
+          </div>
+          <div class="sheet-metric">
+            <span class="sm-label">STATUS</span>
+            <span class="sm-val status-en-route" id="navStatusBadge">EN ROUTE</span>
+            <span class="sm-sub" id="navAckStatus">ED Confirmed (Dr. Rao)</span>
+          </div>
+          <div class="sheet-actions">
+            <button class="btn btn-outline" id="btnChangeHospitalMidRoute">🔄 Change Hospital</button>
+            <button class="btn btn-success" id="btnNavMarkArrived">🏁 Confirm Arrival</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- VIEW 5: 108 DISPATCH FLEET MONITOR (File 01 & 05 Section 9)     -->
+    <!-- =============================================================== -->
+    <section class="view-panel" id="view-dispatch">
+      <div class="dispatch-container">
+        <header class="dispatch-header">
+          <h2>108 Control Room Fleet Overview</h2>
+          <span class="dispatch-time" id="dispatchClock">UTC 10:16:02</span>
+        </header>
+
+        <div class="fleet-overview-cards">
+          <div class="fleet-card active-call">
+            <div class="fc-head">
+              <span class="fc-unit">Ambulance 108 Alpha (ALS)</span>
+              <span class="badge badge-esi-2">ESI 2 • IN ROUTE</span>
+            </div>
+            <p><strong>Incident:</strong> #inc_01HZX990 • Motorcycle Collision</p>
+            <p><strong>Destination:</strong> Apex Level-1 Trauma Hospital</p>
+            <p><strong>Paramedic:</strong> Vikram Singh (EMT-P)</p>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" style="width: 65%;"></div>
+            </div>
+            <span class="fc-sub">Progress: 65% • ETA: 8 min</span>
+          </div>
+
+          <div class="fleet-card available">
+            <div class="fc-head">
+              <span class="fc-unit">Ambulance 108 Bravo (ALS)</span>
+              <span class="badge badge-available">AVAILABLE</span>
+            </div>
+            <p><strong>Station:</strong> North Medical Hub (Sector 8)</p>
+            <p><strong>Crew:</strong> Ready for Dispatch</p>
+            <button class="btn btn-sm btn-outline mt-10">Dispatch to Incident</button>
+          </div>
+
+          <div class="fleet-card available">
+            <div class="fc-head">
+              <span class="fc-unit">Ambulance 108 Charlie (BLS)</span>
+              <span class="badge badge-available">AVAILABLE</span>
+            </div>
+            <p><strong>Station:</strong> South End Depot</p>
+            <p><strong>Crew:</strong> Ready for Dispatch</p>
+            <button class="btn btn-sm btn-outline mt-10">Dispatch to Incident</button>
+          </div>
+        </div>
+
+        <!-- City Hospital Status Grid -->
+        <div class="city-hospitals-card">
+          <div class="card-header">
+            <h3>City Emergency Departments Capacity Monitor</h3>
+          </div>
+          <div class="city-hospitals-table-wrap">
+            <table class="city-table">
+              <thead>
+                <tr>
+                  <th>Hospital Name</th>
+                  <th>Status</th>
+                  <th>ED Occupancy</th>
+                  <th>ICU Beds Free</th>
+                  <th>Trauma Bays Free</th>
+                  <th>Key Specialties</th>
+                </tr>
+              </thead>
+              <tbody id="cityHospitalsTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- OVERRIDE MODAL -->
+  <div class="modal-overlay hidden" id="overrideModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Clinical Override of Hospital Recommendation</h3>
+        <button class="btn-close-modal" id="btnCloseOverrideModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>You are selecting a non-top recommended hospital. In compliance with clinical audit standards, please select a clinical justification:</p>
+        <div class="form-group">
+          <label for="overrideReasonCode">Reason Code *</label>
+          <select id="overrideReasonCode" class="form-control">
+            <option value="PATIENT_REQUEST">PATIENT_REQUEST - Family or patient explicitly requested facility</option>
+            <option value="CLOSER">CLOSER - Imminent deterioration requires closest stabilization facility</option>
+            <option value="KNOWN_DIVERSION">KNOWN_DIVERSION - Verbal diversion communication not yet synced in system</option>
+            <option value="SPECIALIST_ON_SCENE">SPECIALIST_ON_SCENE - Attending physician directive</option>
+            <option value="OTHER">OTHER - Clinical judgement override</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="overrideNotes">Clinical Notes &amp; Justification</label>
+          <textarea id="overrideNotes" class="form-control" rows="3" placeholder="Provide clinical details for audit log..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelOverride">Cancel</button>
+        <button class="btn btn-primary" id="btnConfirmOverride">Confirm &amp; Pre-Alert Facility</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="interactive_map.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

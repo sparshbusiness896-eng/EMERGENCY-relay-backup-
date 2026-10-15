@@ -1,0 +1,192 @@
+{
+  "gcsScale": {
+    "eyeOpening": [
+      { "score": 4, "description": "Spontaneous" },
+      { "score": 3, "description": "To sound / speech" },
+      { "score": 2, "description": "To pressure / pain" },
+      { "score": 1, "description": "None" }
+    ],
+    "verbalResponse": [
+      { "score": 5, "description": "Oriented" },
+      { "score": 4, "description": "Confused" },
+      { "score": 3, "description": "Inappropriate words" },
+      { "score": 2, "description": "Incomprehensible sounds" },
+      { "score": 1, "description": "None" }
+    ],
+    "motorResponse": [
+      { "score": 6, "description": "Obeys commands" },
+      { "score": 5, "description": "Localizing" },
+      { "score": 4, "description": "Normal flexion (withdrawal)" },
+      { "score": 3, "description": "Abnormal flexion (decorticate)" },
+      { "score": 2, "description": "Extension (decerebrate)" },
+      { "score": 1, "description": "None" }
+    ]
+  },
+  "rtsLookupTable": {
+    "gcs": [
+      { "range": [13, 15], "code": 4 },
+      { "range": [9, 12], "code": 3 },
+      { "range": [6, 8], "code": 2 },
+      { "range": [4, 5], "code": 1 },
+      { "range": [3, 3], "code": 0 }
+    ],
+    "sbp": [
+      { "min": 90, "max": 999, "code": 4 },
+      { "min": 76, "max": 89, "code": 3 },
+      { "min": 50, "max": 75, "code": 2 },
+      { "min": 1, "max": 49, "code": 1 },
+      { "min": 0, "max": 0, "code": 0 }
+    ],
+    "rr": [
+      { "min": 10, "max": 29, "code": 4 },
+      { "min": 30, "max": 999, "code": 3 },
+      { "min": 6, "max": 9, "code": 2 },
+      { "min": 1, "max": 5, "code": 1 },
+      { "min": 0, "max": 0, "code": 0 }
+    ],
+    "weights": {
+      "gcs": 0.9368,
+      "sbp": 0.7326,
+      "rr": 0.2908
+    },
+    "traumaCenterThreshold": 11
+  },
+  "esiAcuity": {
+    "levels": [
+      { "level": 1, "name": "Immediate / Resuscitation", "color": "#ef4444", "description": "Immediate life-saving intervention needed" },
+      { "level": 2, "name": "Emergent", "color": "#f97316", "description": "High risk, confused/lethargic, or severe pain/distress" },
+      { "level": 3, "name": "Urgent", "color": "#eab308", "description": "Stable vitals, multiple resources needed" },
+      { "level": 4, "name": "Less Urgent", "color": "#22c55e", "description": "One resource needed" },
+      { "level": 5, "name": "Non-Urgent", "color": "#3b82f6", "description": "No resources needed" }
+    ],
+    "softWarnings": {
+      "spo2Threshold": 90,
+      "sbpLowThreshold": 90,
+      "hrHighThreshold": 130,
+      "hrLowThreshold": 50,
+      "gcsSevereThreshold": 8,
+      "rrLowThreshold": 10,
+      "rrHighThreshold": 29
+    }
+  },
+  "traumaConditions": [
+    "HEAD_INJURY",
+    "SPINAL_INJURY",
+    "CHEST_TRAUMA",
+    "ABDOMINAL_TRAUMA",
+    "PELVIC_FRACTURE",
+    "LIMB_FRACTURE",
+    "AMPUTATION",
+    "BURNS",
+    "PENETRATING_INJURY",
+    "MAJOR_BLEEDING",
+    "CARDIAC_STEMI_SUSPECTED",
+    "STROKE_SUSPECTED",
+    "RESPIRATORY_DISTRESS",
+    "DROWNING",
+    "POISONING",
+    "OBSTETRIC_EMERGENCY",
+    "OTHER"
+  ],
+  "hospitalCapabilities": [
+    "ER_24X7",
+    "TRAUMA_CENTER_L1",
+    "TRAUMA_CENTER_L2",
+    "NEUROSURGERY",
+    "CATH_LAB",
+    "COMPREHENSIVE_STROKE_CENTER",
+    "PRIMARY_STROKE_CENTER",
+    "PEDIATRIC_TRAUMA",
+    "ORTHOPEDICS",
+    "BURN_UNIT",
+    "OBSTETRICS_EMERGENCY",
+    "VASCULAR_SURGERY",
+    "CT_24X7",
+    "BLOOD_BANK",
+    "POISON_CENTER"
+  ],
+  "requirementsMapping": {
+    "CARDIAC_STEMI_SUSPECTED": {
+      "requiredTags": ["CATH_LAB", "ER_24X7"],
+      "preferredTags": [],
+      "bedType": "ICU"
+    },
+    "STROKE_SUSPECTED": {
+      "requiredTags": ["CT_24X7"],
+      "requiredAnyOf": ["COMPREHENSIVE_STROKE_CENTER", "PRIMARY_STROKE_CENTER"],
+      "preferredTags": ["COMPREHENSIVE_STROKE_CENTER", "NEUROSURGERY"],
+      "bedType": "ICU"
+    },
+    "HEAD_INJURY": {
+      "requiredTags": ["NEUROSURGERY", "CT_24X7"],
+      "preferredTags": ["TRAUMA_CENTER_L1"],
+      "bedType": "ICU"
+    },
+    "MAJOR_BLEEDING": {
+      "requiredAnyOf": ["TRAUMA_CENTER_L1", "TRAUMA_CENTER_L2"],
+      "requiredTags": ["BLOOD_BANK"],
+      "preferredTags": ["VASCULAR_SURGERY"],
+      "bedType": "TRAUMA"
+    },
+    "PENETRATING_INJURY": {
+      "requiredAnyOf": ["TRAUMA_CENTER_L1", "TRAUMA_CENTER_L2"],
+      "requiredTags": ["BLOOD_BANK"],
+      "preferredTags": ["VASCULAR_SURGERY"],
+      "bedType": "TRAUMA"
+    },
+    "PELVIC_FRACTURE": {
+      "requiredAnyOf": ["TRAUMA_CENTER_L1", "TRAUMA_CENTER_L2"],
+      "requiredTags": ["BLOOD_BANK"],
+      "preferredTags": ["ORTHOPEDICS"],
+      "bedType": "TRAUMA"
+    },
+    "CHEST_TRAUMA": {
+      "requiredAnyOf": ["TRAUMA_CENTER_L1", "TRAUMA_CENTER_L2"],
+      "requiredTags": ["BLOOD_BANK"],
+      "preferredTags": ["VASCULAR_SURGERY"],
+      "bedType": "TRAUMA"
+    },
+    "ABDOMINAL_TRAUMA": {
+      "requiredAnyOf": ["TRAUMA_CENTER_L1", "TRAUMA_CENTER_L2"],
+      "requiredTags": ["BLOOD_BANK"],
+      "preferredTags": ["VASCULAR_SURGERY"],
+      "bedType": "TRAUMA"
+    },
+    "LIMB_FRACTURE": {
+      "requiredTags": ["ORTHOPEDICS"],
+      "preferredTags": ["VASCULAR_SURGERY"],
+      "bedType": "ER"
+    },
+    "AMPUTATION": {
+      "requiredTags": ["ORTHOPEDICS", "VASCULAR_SURGERY"],
+      "preferredTags": [],
+      "bedType": "ER"
+    },
+    "BURNS": {
+      "requiredAnyOf": ["BURN_UNIT", "TRAUMA_CENTER_L1"],
+      "requiredTags": [],
+      "preferredTags": [],
+      "bedType": "BURN"
+    },
+    "OBSTETRIC_EMERGENCY": {
+      "requiredTags": ["OBSTETRICS_EMERGENCY"],
+      "preferredTags": [],
+      "bedType": "ER"
+    },
+    "PEDIATRIC": {
+      "requiredTags": ["PEDIATRIC_TRAUMA"],
+      "preferredTags": [],
+      "bedType": "PEDIATRIC_ICU"
+    },
+    "DEFAULT": {
+      "requiredTags": ["ER_24X7"],
+      "preferredTags": [],
+      "bedType": "ER"
+    }
+  },
+  "scoringWeights": {
+    "ESI_1": { "eta": 0.45, "spec": 0.30, "cap": 0.20, "load": 0.05 },
+    "ESI_2": { "eta": 0.35, "spec": 0.35, "cap": 0.20, "load": 0.10 },
+    "ESI_3_5": { "eta": 0.25, "spec": 0.25, "cap": 0.25, "load": 0.25 }
+  }
+}

@@ -1,0 +1,161 @@
+[
+  {
+    "scenarioId": "SCENARIO_1_STEMI",
+    "title": "Suspected Acute STEMI Cardiac Emergency",
+    "description": "58-year-old male with crushing chest pain radiating to left arm, diaphoretic, SBP borderline.",
+    "patient": {
+      "name": "Anil Verma",
+      "ageYears": 58,
+      "sex": "MALE",
+      "weightKg": 82
+    },
+    "vitals": {
+      "sbp": 94,
+      "dbp": 62,
+      "heartRate": 112,
+      "respiratoryRate": 22,
+      "spo2": 93,
+      "temperatureC": 36.8,
+      "glucoseMgDl": 140
+    },
+    "gcs": { "eye": 4, "verbal": 5, "motor": 6 },
+    "traumaTypes": ["CARDIAC_STEMI_SUSPECTED"],
+    "expectedAcuity": {
+      "esiSuggested": 2,
+      "gcsTotal": 15,
+      "rtsTriage": 12
+    },
+    "expectedRecommendation": {
+      "requiredTags": ["CATH_LAB", "ER_24X7"],
+      "bedType": "ICU",
+      "topCandidates": ["hos_001", "hos_002"]
+    }
+  },
+  {
+    "scenarioId": "SCENARIO_2_PEDIATRIC_HEAD_INJURY",
+    "title": "Severe Pediatric Traumatic Brain Injury",
+    "description": "8-year-old female pedestrian struck by car, unconscious, posturing.",
+    "patient": {
+      "name": "Aaradhya Das",
+      "ageYears": 8,
+      "sex": "FEMALE",
+      "weightKg": 24
+    },
+    "vitals": {
+      "sbp": 82,
+      "dbp": 50,
+      "heartRate": 138,
+      "respiratoryRate": 28,
+      "spo2": 88,
+      "temperatureC": 36.1,
+      "glucoseMgDl": 95
+    },
+    "gcs": { "eye": 2, "verbal": 2, "motor": 3 },
+    "traumaTypes": ["HEAD_INJURY", "MAJOR_BLEEDING"],
+    "expectedAcuity": {
+      "esiSuggested": 1,
+      "gcsTotal": 7,
+      "rtsTriage": 9
+    },
+    "expectedRecommendation": {
+      "requiredTags": ["NEUROSURGERY", "CT_24X7", "BLOOD_BANK", "PEDIATRIC_TRAUMA"],
+      "bedType": "PEDIATRIC_ICU",
+      "topCandidates": ["hos_004", "hos_001"]
+    }
+  },
+  {
+    "scenarioId": "SCENARIO_3_POLYTRAUMA_HEMORRHAGE",
+    "title": "Adult High-Energy Collision with Massive Bleeding",
+    "description": "34-year-old male with pelvic crush injury and severe penetrating abdominal wound.",
+    "patient": {
+      "name": "Rohan Sharma",
+      "ageYears": 34,
+      "sex": "MALE",
+      "weightKg": 75
+    },
+    "vitals": {
+      "sbp": 78,
+      "dbp": 46,
+      "heartRate": 134,
+      "respiratoryRate": 26,
+      "spo2": 91,
+      "temperatureC": 35.8,
+      "glucoseMgDl": 105
+    },
+    "gcs": { "eye": 3, "verbal": 3, "motor": 4 },
+    "traumaTypes": ["PELVIC_FRACTURE", "ABDOMINAL_TRAUMA", "MAJOR_BLEEDING"],
+    "expectedAcuity": {
+      "esiSuggested": 1,
+      "gcsTotal": 10,
+      "rtsTriage": 8
+    },
+    "expectedRecommendation": {
+      "requiredTags": ["BLOOD_BANK"],
+      "bedType": "TRAUMA",
+      "topCandidates": ["hos_001", "hos_007"]
+    }
+  },
+  {
+    "scenarioId": "SCENARIO_4_SEVERE_BURNS",
+    "title": "Industrial Boiler Flash Burn 45% TBSA",
+    "description": "42-year-old female industrial worker with 2nd and 3rd degree burns to torso and extremities.",
+    "patient": {
+      "name": "Meera Patel",
+      "ageYears": 42,
+      "sex": "FEMALE",
+      "weightKg": 60
+    },
+    "vitals": {
+      "sbp": 105,
+      "dbp": 70,
+      "heartRate": 118,
+      "respiratoryRate": 24,
+      "spo2": 95,
+      "temperatureC": 37.2,
+      "glucoseMgDl": 120
+    },
+    "gcs": { "eye": 4, "verbal": 5, "motor": 6 },
+    "traumaTypes": ["BURNS"],
+    "expectedAcuity": {
+      "esiSuggested": 2,
+      "gcsTotal": 15,
+      "rtsTriage": 12
+    },
+    "expectedRecommendation": {
+      "requiredTags": ["BURN_UNIT"],
+      "bedType": "BURN",
+      "topCandidates": ["hos_005"]
+    }
+  },
+  {
+    "scenarioId": "SCENARIO_5_DIVERSION_EXCLUSION",
+    "title": "Hospital On Diversion Exclusion Test",
+    "description": "Incident located immediately adjacent to hos_009 (North Suburban), verifying that diverted hospital is excluded or marked with clear capacity warning.",
+    "patient": {
+      "name": "Test Subject",
+      "ageYears": 40,
+      "sex": "MALE",
+      "weightKg": 70
+    },
+    "vitals": {
+      "sbp": 120,
+      "dbp": 80,
+      "heartRate": 80,
+      "respiratoryRate": 16,
+      "spo2": 98,
+      "temperatureC": 36.6,
+      "glucoseMgDl": 100
+    },
+    "gcs": { "eye": 4, "verbal": 5, "motor": 6 },
+    "traumaTypes": ["OTHER"],
+    "expectedAcuity": {
+      "esiSuggested": 3,
+      "gcsTotal": 15,
+      "rtsTriage": 12
+    },
+    "expectedRecommendation": {
+      "divertedHospitalId": "hos_009",
+      "mustNotBeRankedFirst": true
+    }
+  }
+]

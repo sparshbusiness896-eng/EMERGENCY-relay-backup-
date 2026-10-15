@@ -1,0 +1,12 @@
+{
+  "name": "emergency-relay-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unified launcher for the Triage Relay and Hospital Relay backends.",
+  "scripts": {
+    "start": "node backend/common-server.js",
+    "dev": "node backend/common-server.js",
+    "db:setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-local-db.ps1",
+    "test": "npm test --prefix \"hospital side relay\" && npm test --prefix \"traige relay/backend\""
+  }
+}

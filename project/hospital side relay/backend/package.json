@@ -1,0 +1,30 @@
+{
+  "name": "hospital-relay-backend",
+  "version": "1.0.0",
+  "description": "Hospital Emergency Coordination Portal & Paramedic Relay Backend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "test": "node --test test/security.test.js test/relay.test.js"
+  },
+  "keywords": [
+    "hospital",
+    "emergency",
+    "paramedic-relay",
+    "triage",
+    "telehealth",
+    "real-time"
+  ],
+  "author": "Emergency Healthcare Engineering Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.6",
+    "express": "^4.21.2",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.1"
+  }
+}

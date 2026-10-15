@@ -1,0 +1,282 @@
+/* ==========================================================================
+   VIEWS: CASE DETAILS, CAPACITY MGMT, STAFF, HISTORY, AUDIT & SIMULATOR
+   ========================================================================== */
+
+/* Case Details Drawer / Modal Inner */
+.case-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.case-critical-banner {
+  background: var(--red-50);
+  border: 1px solid var(--red-border);
+  border-left: 6px solid var(--red-600);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.case-banner-text {
+  font-size: 13px;
+  color: var(--red-900);
+  font-weight: 600;
+}
+
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.vital-card {
+  background: var(--slate-50);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  text-align: center;
+}
+
+.vital-card .vital-val {
+  font-size: 20px;
+  display: block;
+  margin: 4px 0;
+}
+
+.case-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--slate-500);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clinical-notes-box {
+  background: var(--slate-50);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-size: 13px;
+  color: var(--slate-800);
+  line-height: 1.6;
+}
+
+/* Quick Response Templates Grid */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.template-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  text-align: left;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.template-btn:hover {
+  background: var(--red-50);
+  border-color: var(--red-300);
+  color: var(--red-800);
+}
+
+/* Timeline */
+.timeline-list {
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px solid var(--slate-200);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red-600);
+  border: 2px solid #FFFFFF;
+}
+
+.timeline-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--slate-500);
+  font-weight: 600;
+}
+
+.timeline-desc {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate-800);
+}
+
+.timeline-actor {
+  font-size: 11px;
+  color: var(--slate-500);
+}
+
+/* Data Tables (Staff, History, Audit) */
+.data-table-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.data-table th {
+  background: var(--slate-50);
+  padding: 12px 18px;
+  font-weight: 700;
+  color: var(--slate-600);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.data-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--slate-800);
+}
+
+.data-table tr:hover td {
+  background: var(--slate-50);
+}
+
+.table-row-critical td {
+  border-left: 4px solid var(--red-600);
+}
+
+/* Role Badges */
+.badge-role {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.role-admin {
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+.role-emergency {
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+}
+
+.role-capacity {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.role-auditor {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #CBD5E1;
+}
+
+/* Simulator Drawer / Modal */
+.sim-preset-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sim-preset-card {
+  background: var(--slate-50);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: center;
+}
+
+.sim-preset-card:hover {
+  border-color: var(--red-500);
+  background: var(--red-50);
+}
+
+.sim-preset-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin-bottom: 4px;
+}
+
+.sim-preset-desc {
+  font-size: 11px;
+  color: var(--slate-600);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--slate-700);
+  margin-bottom: 6px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-family: var(--font-main);
+  font-size: 13px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  color: var(--slate-900);
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--red-500);
+  box-shadow: 0 0 0 3px var(--red-glow);
+}

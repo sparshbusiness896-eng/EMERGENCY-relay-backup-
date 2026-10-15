@@ -1,0 +1,24 @@
+{
+  "name": "triage-relay-backend",
+  "version": "1.0.0",
+  "description": "Backend API, Clinical Triage Calculators, and Smart Hospital Recommendation Engine",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node tests/run_tests.js && node tests/relay_tests.js",
+    "simulate": "node src/simulate_ambulance.js"
+  },
+  "keywords": [
+    "emergency-triage",
+    "clinical-decision-support",
+    "hospital-recommendations",
+    "postgis",
+    "websocket"
+  ],
+  "author": "Triage Relay Core Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "pg": "^8.12.0"
+  }
+}

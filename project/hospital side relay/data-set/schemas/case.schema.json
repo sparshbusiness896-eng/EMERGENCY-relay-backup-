@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmergencyCase",
+  "type": "object",
+  "required": [
+    "case_id",
+    "hospital_id",
+    "submitted_at",
+    "priority",
+    "emergency_type",
+    "patient_condition_summary",
+    "delivery_state",
+    "response_status"
+  ],
+  "properties": {
+    "case_id": { "type": "string" },
+    "idempotency_key": { "type": "string" },
+    "version": { "type": "integer" },
+    "hospital_id": { "type": "string" },
+    "submitted_at": { "type": "string", "format": "date-time" },
+    "received_at": { "type": ["string", "null"], "format": "date-time" },
+    "priority": {
+      "type": "string",
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"]
+    },
+    "emergency_type": { "type": "string" },
+    "patient_condition_summary": { "type": "string" },
+    "patient": {
+      "type": "object",
+      "properties": {
+        "age": { "type": ["integer", "null"] },
+        "age_group": { "type": ["string", "null"] },
+        "sex": { "type": ["string", "null"] },
+        "identifier": { "type": ["string", "null"] }
+      }
+    },
+    "vital_signs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "value", "unit", "measured_at"],
+        "properties": {
+          "type": { "type": "string" },
+          "value": { "type": ["number", "string"] },
+          "unit": { "type": "string" },
+          "measured_at": { "type": "string" }
+        }
+      }
+    },
+    "notes": { "type": "string" },
+    "treatment_given": { "type": ["string", "null"] },
+    "paramedic": {
+      "type": "object",
+      "required": ["unit_id", "callback_phone"],
+      "properties": {
+        "unit_id": { "type": "string" },
+        "name_or_code": { "type": "string" },
+        "callback_phone": { "type": "string" }
+      }
+    },
+    "eta": { "type": "string", "format": "date-time" },
+    "eta_updated_at": { "type": ["string", "null"] },
+    "delivery_state": {
+      "type": "string",
+      "enum": ["DELIVERING", "DELIVERED", "DELIVERY_FAILED", "CANCELLED"]
+    },
+    "response_status": {
+      "type": "string",
+      "enum": [
+        "NEW",
+        "RECEIVED",
+        "PREPARING",
+        "READY",
+        "UNABLE_TO_RECEIVE",
+        "PATIENT_ARRIVED",
+        "HANDOVER_COMPLETE"
+      ]
+    },
+    "acknowledged_by": { "type": ["object", "null"] },
+    "resources_requested": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "detail": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    "instructions_to_paramedic": { "type": ["string", "null"] },
+    "unable_to_receive_reason": {
+      "type": ["object", "null"],
+      "properties": {
+        "reason_code": {
+          "type": "string",
+          "enum": ["NO_CAPACITY", "RESOURCE_UNAVAILABLE", "DIVERSION", "OTHER"]
+        },
+        "reason_note": { "type": "string" }
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": { "type": "string" },
+          "actor": { "type": "string" },
+          "action": { "type": "string" },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  }
+}

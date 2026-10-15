@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AuditLogEntry",
+  "type": "object",
+  "required": ["id", "hospital_id", "user_id", "role", "action", "target_type", "target_id", "outcome", "occurred_at"],
+  "properties": {
+    "id": { "type": "string" },
+    "hospital_id": { "type": "string" },
+    "user_id": { "type": "string" },
+    "user_name": { "type": "string" },
+    "role": {
+      "type": "string",
+      "enum": ["ADMIN", "EMERGENCY_STAFF", "CAPACITY_COORDINATOR", "VIEWER_AUDITOR", "SYSTEM"]
+    },
+    "action": { "type": "string" },
+    "target_type": { "type": "string" },
+    "target_id": { "type": "string" },
+    "details": { "type": "object" },
+    "outcome": {
+      "type": "string",
+      "enum": ["SUCCESS", "DENIED", "ERROR"]
+    },
+    "ip_address": { "type": "string" },
+    "occurred_at": { "type": "string", "format": "date-time" }
+  }
+}

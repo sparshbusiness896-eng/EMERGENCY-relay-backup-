@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HospitalProfile",
+  "type": "object",
+  "required": ["id", "name", "address", "phone", "email", "emergency_department_24_7", "verification_status"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "trauma_level": { "type": "string", "enum": ["LEVEL_1", "LEVEL_2", "LEVEL_3", "COMMUNITY"] },
+    "address": {
+      "type": "object",
+      "required": ["street", "city", "region", "postal_code", "country"],
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "region": { "type": "string" },
+        "postal_code": { "type": "string" },
+        "country": { "type": "string" }
+      }
+    },
+    "phone": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "location": {
+      "type": "object",
+      "properties": {
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" }
+      }
+    },
+    "emergency_department_24_7": { "type": "boolean" },
+    "verification_status": {
+      "type": "string",
+      "enum": ["DRAFT", "PENDING", "INFO_NEEDED", "APPROVED", "REJECTED", "SUSPENDED"]
+    },
+    "verified_at": { "type": ["string", "null"] },
+    "verified_by": { "type": ["string", "null"] },
+    "time_zone": { "type": "string" }
+  }
+}

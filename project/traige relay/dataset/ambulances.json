@@ -1,0 +1,29 @@
+[
+  {
+    "id": "amb_108_014",
+    "callSign": "Ambulance 108 Alpha",
+    "plateNumber": "UK-07-TA-1081",
+    "type": "ALS",
+    "isAvailable": true,
+    "currentLocation": { "lat": 30.3110, "lng": 78.0280 },
+    "equipment": ["DEFIBRILLATOR_MONITOR", "PORTABLE_VENTILATOR", "IV_INFUSION_PUMP", "EXTRICATON_KIT"]
+  },
+  {
+    "id": "amb_108_015",
+    "callSign": "Ambulance 108 Bravo",
+    "plateNumber": "UK-07-TA-1082",
+    "type": "ALS",
+    "isAvailable": true,
+    "currentLocation": { "lat": 30.3320, "lng": 78.0410 },
+    "equipment": ["DEFIBRILLATOR_MONITOR", "PORTABLE_VENTILATOR", "SUCTION_UNIT"]
+  },
+  {
+    "id": "amb_108_016",
+    "callSign": "Ambulance 108 Charlie",
+    "plateNumber": "UK-07-TB-2090",
+    "type": "BLS",
+    "isAvailable": true,
+    "currentLocation": { "lat": 30.2950, "lng": 78.0510 },
+    "equipment": ["AED", "OXYGEN_KIT", "FIRST_AID_KIT", "SPINE_BOARD"]
+  }
+]

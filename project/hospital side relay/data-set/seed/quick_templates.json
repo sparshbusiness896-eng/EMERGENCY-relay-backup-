@@ -1,0 +1,38 @@
+[
+  {
+    "id": "tpl_trauma_1",
+    "title": "Route to Trauma Bay 1",
+    "text": "Route ambulance directly to Trauma Bay 1. Level 1 Surgical Trauma Team mobilized and standing by.",
+    "applicable_priority": "CRITICAL"
+  },
+  {
+    "id": "tpl_cath_suite",
+    "title": "Cath Lab Suite 2 Prepared",
+    "text": "Cath Lab Suite 2 is prepped. Interventional Cardiology team standing by in ED for direct transfer.",
+    "applicable_priority": "CRITICAL"
+  },
+  {
+    "id": "tpl_stroke_ct",
+    "title": "Code Stroke / Direct CT",
+    "text": "Code Stroke team active. Transfer patient directly to CT Scanner 1 bed upon arrival for rapid imaging.",
+    "applicable_priority": "HIGH"
+  },
+  {
+    "id": "tpl_pediatric_bay",
+    "title": "Pediatric Intake Bay 3",
+    "text": "Ambulance Bay 3 is cleared. Pediatric resuscitation team and high-flow equipment standing by.",
+    "applicable_priority": "MEDIUM"
+  },
+  {
+    "id": "tpl_vitals_update",
+    "title": "Request Updated Vitals",
+    "text": "Hospital requests repeat blood pressure, pulse, and oxygen saturation measurement prior to arrival.",
+    "applicable_priority": "ALL"
+  },
+  {
+    "id": "tpl_bay_hold",
+    "title": "Hold at Bay Entrance",
+    "text": "Please hold patient at ambulance entrance for secondary decontamination assessment.",
+    "applicable_priority": "HIGH"
+  }
+]

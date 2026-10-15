@@ -1,0 +1,102 @@
+{
+  "hospital_id": "hosp_metro_01",
+  "specialists": [
+    {
+      "id": "spec_trauma",
+      "name": "Trauma Surgeon (Lead)",
+      "category": "SPECIALIST",
+      "status": "ON_DUTY",
+      "assigned_location": "Trauma Bay 1",
+      "physician": "Dr. Ronald Hayes, FACS",
+      "updated_at": "2026-10-08T01:30:00Z"
+    },
+    {
+      "id": "spec_cardio",
+      "name": "Interventional Cardiologist",
+      "category": "SPECIALIST",
+      "status": "ON_DUTY",
+      "assigned_location": "Cath Lab A",
+      "physician": "Dr. Priya Patel, FACC",
+      "updated_at": "2026-10-08T01:15:00Z"
+    },
+    {
+      "id": "spec_neuro",
+      "name": "Stroke Neurovascular Specialist",
+      "category": "SPECIALIST",
+      "status": "ON_CALL",
+      "response_time_minutes": 10,
+      "physician": "Dr. Arthur Campbell",
+      "updated_at": "2026-10-08T01:00:00Z"
+    },
+    {
+      "id": "spec_anesth",
+      "name": "Emergency Anesthesiologist",
+      "category": "SPECIALIST",
+      "status": "ON_DUTY",
+      "assigned_location": "ED Resuscitation",
+      "physician": "Dr. Kimberly Zhao",
+      "updated_at": "2026-10-08T01:30:00Z"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "eq_ct1",
+      "name": "CT Scanner 1 (ED Fast-Track)",
+      "category": "EQUIPMENT",
+      "status": "OPERATIONAL",
+      "is_available": true,
+      "location": "ED Ground Floor",
+      "updated_at": "2026-10-08T01:45:00Z"
+    },
+    {
+      "id": "eq_ct2",
+      "name": "CT Scanner 2 (Trauma Spectral)",
+      "category": "EQUIPMENT",
+      "status": "OPERATIONAL",
+      "is_available": true,
+      "location": "Trauma Radiology",
+      "updated_at": "2026-10-08T01:45:00Z"
+    },
+    {
+      "id": "eq_mri",
+      "name": "3T MRI Diagnostic Suite",
+      "category": "EQUIPMENT",
+      "status": "MAINTENANCE",
+      "is_available": false,
+      "notes": "Scheduled calibration until 06:00 UTC",
+      "updated_at": "2026-10-08T00:30:00Z"
+    },
+    {
+      "id": "eq_vents",
+      "name": "ICU Ventilators (Hamilton T1/G5)",
+      "category": "EQUIPMENT",
+      "status": "OPERATIONAL",
+      "quantity_available": 7,
+      "quantity_total": 15,
+      "is_available": true,
+      "updated_at": "2026-10-08T01:30:00Z"
+    },
+    {
+      "id": "eq_ecmo",
+      "name": "ECMO Mobile Circuit",
+      "category": "EQUIPMENT",
+      "status": "OPERATIONAL",
+      "quantity_available": 2,
+      "quantity_total": 2,
+      "is_available": true,
+      "updated_at": "2026-10-08T01:00:00Z"
+    }
+  ],
+  "blood_products": [
+    { "type": "O_NEG", "label": "O-Negative (Universal PRBC)", "units_available": 14, "status": "ADEQUATE" },
+    { "type": "O_POS", "label": "O-Positive PRBC", "units_available": 28, "status": "ADEQUATE" },
+    { "type": "FFP", "label": "Fresh Frozen Plasma", "units_available": 12, "status": "ADEQUATE" },
+    { "type": "PLATELETS", "label": "Platelet Pheresed Units", "units_available": 4, "status": "MODERATE" },
+    { "type": "CRYO", "label": "Cryoprecipitate", "units_available": 10, "status": "ADEQUATE" }
+  ],
+  "other_resources": {
+    "helipad_status": "OPEN",
+    "decontamination_unit": "READY",
+    "isolation_negative_pressure_rooms_available": 3
+  }
+}

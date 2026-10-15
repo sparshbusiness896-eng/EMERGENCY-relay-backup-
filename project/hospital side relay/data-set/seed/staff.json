@@ -1,0 +1,50 @@
+[
+  {
+    "id": "usr_sarah_chen",
+    "hospital_id": "hosp_metro_01",
+    "full_name": "Dr. Sarah Chen, MD",
+    "email": "schen@stjude-metro.org",
+    "phone": "+1 (555) 911-4011",
+    "role": "ADMIN",
+    "title": "Medical Director & Chief of Emergency Services",
+    "status": "ACTIVE",
+    "second_factor_enabled": true,
+    "last_sign_in_at": "2026-10-08T01:45:00Z"
+  },
+  {
+    "id": "usr_marcus_vance",
+    "hospital_id": "hosp_metro_01",
+    "full_name": "Marcus Vance, BSN, RN",
+    "email": "mvance@stjude-metro.org",
+    "phone": "+1 (555) 911-4022",
+    "role": "EMERGENCY_STAFF",
+    "title": "Charge Nurse / Trauma Triage Lead",
+    "status": "ACTIVE",
+    "second_factor_enabled": true,
+    "last_sign_in_at": "2026-10-08T01:52:00Z"
+  },
+  {
+    "id": "usr_elena_rostova",
+    "hospital_id": "hosp_metro_01",
+    "full_name": "Elena Rostova",
+    "email": "erostova@stjude-metro.org",
+    "phone": "+1 (555) 911-4033",
+    "role": "CAPACITY_COORDINATOR",
+    "title": "Patient Flow & Bed Capacity Coordinator",
+    "status": "ACTIVE",
+    "second_factor_enabled": true,
+    "last_sign_in_at": "2026-10-08T01:30:00Z"
+  },
+  {
+    "id": "usr_david_morales",
+    "hospital_id": "hosp_metro_01",
+    "full_name": "David Morales",
+    "email": "dmorales@stjude-metro.org",
+    "phone": "+1 (555) 911-4044",
+    "role": "VIEWER_AUDITOR",
+    "title": "Clinical Quality & Compliance Auditor",
+    "status": "ACTIVE",
+    "second_factor_enabled": true,
+    "last_sign_in_at": "2026-10-07T18:10:00Z"
+  }
+]

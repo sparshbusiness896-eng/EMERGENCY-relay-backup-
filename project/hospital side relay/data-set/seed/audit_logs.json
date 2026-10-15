@@ -1,0 +1,72 @@
+[
+  {
+    "id": "aud_1001",
+    "hospital_id": "hosp_metro_01",
+    "user_id": "usr_marcus_vance",
+    "user_name": "Marcus Vance, BSN, RN",
+    "role": "EMERGENCY_STAFF",
+    "action": "CASE_ACKNOWLEDGED",
+    "target_type": "CASE",
+    "target_id": "case_8b21c490",
+    "details": { "status": "RECEIVED", "priority": "CRITICAL", "emergency_type": "Acute STEMI" },
+    "outcome": "SUCCESS",
+    "ip_address": "10.24.110.14",
+    "occurred_at": "2026-10-08T01:55:30Z"
+  },
+  {
+    "id": "aud_1002",
+    "hospital_id": "hosp_metro_01",
+    "user_id": "usr_sarah_chen",
+    "user_name": "Dr. Sarah Chen, MD",
+    "role": "ADMIN",
+    "action": "STATUS_CHANGED",
+    "target_type": "CASE",
+    "target_id": "case_9a44e217",
+    "details": { "from_status": "RECEIVED", "to_status": "PREPARING", "resources": ["Stroke Neurologist", "CT 1"] },
+    "outcome": "SUCCESS",
+    "ip_address": "10.24.110.02",
+    "occurred_at": "2026-10-08T01:50:10Z"
+  },
+  {
+    "id": "aud_1003",
+    "hospital_id": "hosp_metro_01",
+    "user_id": "usr_elena_rostova",
+    "user_name": "Elena Rostova",
+    "role": "CAPACITY_COORDINATOR",
+    "action": "CAPACITY_UPDATED",
+    "target_type": "CAPACITY",
+    "target_id": "cap_snap_20261008_01",
+    "details": { "available_beds": 18, "occupied_beds": 102, "icu_beds_vacant": 4 },
+    "outcome": "SUCCESS",
+    "ip_address": "10.24.110.45",
+    "occurred_at": "2026-10-08T01:45:00Z"
+  },
+  {
+    "id": "aud_1004",
+    "hospital_id": "hosp_metro_01",
+    "user_id": "usr_marcus_vance",
+    "user_name": "Marcus Vance, BSN, RN",
+    "role": "EMERGENCY_STAFF",
+    "action": "INSTRUCTION_SENT",
+    "target_type": "CASE",
+    "target_id": "case_8b21c490",
+    "details": { "instruction_length": 112, "recipient_unit": "MEDIC-UNIT-07" },
+    "outcome": "SUCCESS",
+    "ip_address": "10.24.110.14",
+    "occurred_at": "2026-10-08T01:56:00Z"
+  },
+  {
+    "id": "aud_1005",
+    "hospital_id": "hosp_metro_01",
+    "user_id": "usr_david_morales",
+    "user_name": "David Morales",
+    "role": "VIEWER_AUDITOR",
+    "action": "AUDIT_LOG_ACCESSED",
+    "target_type": "SYSTEM",
+    "target_id": "audit_trail",
+    "details": { "records_queried": 25 },
+    "outcome": "SUCCESS",
+    "ip_address": "10.24.110.99",
+    "occurred_at": "2026-10-08T01:10:00Z"
+  }
+]

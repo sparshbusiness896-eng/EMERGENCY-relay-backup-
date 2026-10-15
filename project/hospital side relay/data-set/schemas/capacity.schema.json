@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CapacitySnapshot",
+  "type": "object",
+  "required": [
+    "id",
+    "hospital_id",
+    "total_beds",
+    "available_beds",
+    "occupied_beds",
+    "icu_beds_vacant",
+    "operating_theaters_available",
+    "recorded_at",
+    "recorded_by_user_id"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "hospital_id": { "type": "string" },
+    "total_beds": { "type": "integer" },
+    "available_beds": { "type": "integer" },
+    "occupied_beds": { "type": "integer" },
+    "icu_beds_vacant": { "type": "integer" },
+    "icu_beds_total": { "type": "integer" },
+    "operating_theaters_available": { "type": "integer" },
+    "operating_theaters_total": { "type": "integer" },
+    "trauma_bays_available": { "type": "integer" },
+    "trauma_bays_total": { "type": "integer" },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "recorded_by_user_id": { "type": "string" },
+    "recorded_by_name": { "type": "string" },
+    "confirmed_without_change": { "type": "boolean" },
+    "freshness_threshold_minutes": { "type": "integer" }
+  }
+}

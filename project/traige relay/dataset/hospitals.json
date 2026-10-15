@@ -1,0 +1,238 @@
+[
+  {
+    "id": "hos_001",
+    "name": "Apex Level-1 Trauma & Multi-Specialty Hospital",
+    "address": "Plot 14, Health City Parkway, Central Sector",
+    "phone": "+91-135-255-0101",
+    "coordinates": { "lat": 30.3165, "lng": 78.0322 },
+    "edEntranceCoordinates": { "lat": 30.3168, "lng": 78.0325 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 68,
+    "capabilities": [
+      "ER_24X7",
+      "TRAUMA_CENTER_L1",
+      "CATH_LAB",
+      "COMPREHENSIVE_STROKE_CENTER",
+      "NEUROSURGERY",
+      "VASCULAR_SURGERY",
+      "ORTHOPEDICS",
+      "CT_24X7",
+      "BLOOD_BANK"
+    ],
+    "bedInventory": {
+      "ER": { "total": 25, "available": 8 },
+      "ICU": { "total": 12, "available": 4 },
+      "TRAUMA": { "total": 6, "available": 2 },
+      "OR": { "total": 4, "available": 1 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:12:00Z"
+  },
+  {
+    "id": "hos_002",
+    "name": "Metro Heart & Vascular Super-Specialty Institute",
+    "address": "88 Ring Road, South Medical Corridor",
+    "phone": "+91-135-255-0102",
+    "coordinates": { "lat": 30.3050, "lng": 78.0410 },
+    "edEntranceCoordinates": { "lat": 30.3052, "lng": 78.0412 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 55,
+    "capabilities": [
+      "ER_24X7",
+      "CATH_LAB",
+      "VASCULAR_SURGERY",
+      "CT_24X7",
+      "BLOOD_BANK"
+    ],
+    "bedInventory": {
+      "ER": { "total": 15, "available": 6 },
+      "ICU": { "total": 14, "available": 5 },
+      "OR": { "total": 3, "available": 2 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:14:00Z"
+  },
+  {
+    "id": "hos_003",
+    "name": "Comprehensive Neuro & Stroke Regional Hospital",
+    "address": "12 Civil Lines, West Wing",
+    "phone": "+91-135-255-0103",
+    "coordinates": { "lat": 30.3290, "lng": 78.0190 },
+    "edEntranceCoordinates": { "lat": 30.3292, "lng": 78.0192 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 60,
+    "capabilities": [
+      "ER_24X7",
+      "COMPREHENSIVE_STROKE_CENTER",
+      "PRIMARY_STROKE_CENTER",
+      "NEUROSURGERY",
+      "CT_24X7",
+      "BLOOD_BANK"
+    ],
+    "bedInventory": {
+      "ER": { "total": 16, "available": 5 },
+      "ICU": { "total": 10, "available": 3 },
+      "TRAUMA": { "total": 4, "available": 1 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:10:00Z"
+  },
+  {
+    "id": "hos_004",
+    "name": "Children & Maternity Emergency Medical Center",
+    "address": "45 Shanti Path, Sector 4",
+    "phone": "+91-135-255-0104",
+    "coordinates": { "lat": 30.3340, "lng": 78.0550 },
+    "edEntranceCoordinates": { "lat": 30.3342, "lng": 78.0553 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 42,
+    "capabilities": [
+      "ER_24X7",
+      "PEDIATRIC_TRAUMA",
+      "OBSTETRICS_EMERGENCY",
+      "BLOOD_BANK",
+      "CT_24X7"
+    ],
+    "bedInventory": {
+      "ER": { "total": 20, "available": 11 },
+      "PEDIATRIC_ICU": { "total": 8, "available": 3 },
+      "ICU": { "total": 6, "available": 2 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:15:00Z"
+  },
+  {
+    "id": "hos_005",
+    "name": "St. Jude Burn & Emergency Trauma Center",
+    "address": "7 Industrial Bypass, East Zone",
+    "phone": "+91-135-255-0105",
+    "coordinates": { "lat": 30.2980, "lng": 78.0620 },
+    "edEntranceCoordinates": { "lat": 30.2982, "lng": 78.0622 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 75,
+    "capabilities": [
+      "ER_24X7",
+      "BURN_UNIT",
+      "TRAUMA_CENTER_L1",
+      "BLOOD_BANK",
+      "CT_24X7"
+    ],
+    "bedInventory": {
+      "ER": { "total": 14, "available": 4 },
+      "BURN": { "total": 10, "available": 3 },
+      "TRAUMA": { "total": 5, "available": 1 },
+      "ICU": { "total": 6, "available": 1 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:05:00Z"
+  },
+  {
+    "id": "hos_006",
+    "name": "Valley Orthopedic & Surgical Emergency Hospital",
+    "address": "19 Ridge View Road, North Foothills",
+    "phone": "+91-135-255-0106",
+    "coordinates": { "lat": 30.3450, "lng": 78.0080 },
+    "edEntranceCoordinates": { "lat": 30.3452, "lng": 78.0082 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 50,
+    "capabilities": [
+      "ER_24X7",
+      "ORTHOPEDICS",
+      "VASCULAR_SURGERY",
+      "CT_24X7"
+    ],
+    "bedInventory": {
+      "ER": { "total": 12, "available": 6 },
+      "TRAUMA": { "total": 4, "available": 2 },
+      "ICU": { "total": 4, "available": 1 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:11:00Z"
+  },
+  {
+    "id": "hos_007",
+    "name": "Central Memorial Level-2 Trauma Hospital",
+    "address": "102 Grand Trunk Ave, Old Cantonment",
+    "phone": "+91-135-255-0107",
+    "coordinates": { "lat": 30.3120, "lng": 78.0250 },
+    "edEntranceCoordinates": { "lat": 30.3122, "lng": 78.0253 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 72,
+    "capabilities": [
+      "ER_24X7",
+      "TRAUMA_CENTER_L2",
+      "BLOOD_BANK",
+      "CT_24X7",
+      "ORTHOPEDICS"
+    ],
+    "bedInventory": {
+      "ER": { "total": 18, "available": 5 },
+      "TRAUMA": { "total": 6, "available": 2 },
+      "ICU": { "total": 8, "available": 2 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:08:00Z"
+  },
+  {
+    "id": "hos_008",
+    "name": "Riverside General & Emergency Care Center",
+    "address": "33 Riverbed Expressway, South End",
+    "phone": "+91-135-255-0108",
+    "coordinates": { "lat": 30.2850, "lng": 78.0480 },
+    "edEntranceCoordinates": { "lat": 30.2853, "lng": 78.0483 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 80,
+    "capabilities": [
+      "ER_24X7",
+      "CT_24X7",
+      "POISON_CENTER"
+    ],
+    "bedInventory": {
+      "ER": { "total": 14, "available": 3 },
+      "ICU": { "total": 4, "available": 1 }
+    },
+    "bedsUpdatedAt": "2026-10-07T09:45:00Z"
+  },
+  {
+    "id": "hos_009",
+    "name": "North Suburban General Hospital",
+    "address": "210 Highway Link, North Industrial Hub",
+    "phone": "+91-135-255-0109",
+    "coordinates": { "lat": 30.3620, "lng": 78.0120 },
+    "edEntranceCoordinates": { "lat": 30.3622, "lng": 78.0122 },
+    "arrivalRadiusM": 50,
+    "status": "DIVERSION",
+    "edOccupancyPercent": 98,
+    "capabilities": [
+      "ER_24X7",
+      "CATH_LAB",
+      "CT_24X7"
+    ],
+    "bedInventory": {
+      "ER": { "total": 15, "available": 0 },
+      "ICU": { "total": 6, "available": 0 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:00:00Z"
+  },
+  {
+    "id": "hos_010",
+    "name": "Sunrise Emergency Community Clinic",
+    "address": "5 Bazar Gate, Downtown Market",
+    "phone": "+91-135-255-0110",
+    "coordinates": { "lat": 30.3210, "lng": 78.0370 },
+    "edEntranceCoordinates": { "lat": 30.3212, "lng": 78.0372 },
+    "arrivalRadiusM": 50,
+    "status": "ACTIVE",
+    "edOccupancyPercent": 90,
+    "capabilities": [
+      "ER_24X7",
+      "POISON_CENTER"
+    ],
+    "bedInventory": {
+      "ER": { "total": 8, "available": 2 },
+      "ICU": { "total": 2, "available": 0 }
+    },
+    "bedsUpdatedAt": "2026-10-07T10:13:00Z"
+  }
+]

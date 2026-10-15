@@ -1,0 +1,62 @@
+[
+  {
+    "id": "hosp_metro_01",
+    "name": "St. Jude Metropolitan Trauma Center",
+    "trauma_level": "LEVEL_1",
+    "relay_code": "SJM-ER-01",
+    "address": {
+      "street": "742 Emergency Blvd, Medical District",
+      "city": "Metro City",
+      "region": "State Central",
+      "postal_code": "90210",
+      "country": "US"
+    },
+    "phone": "+1 (555) 911-4000",
+    "email": "trauma.coordination@stjude-metro.org",
+    "location": {
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "emergency_department_24_7": true,
+    "verification_status": "APPROVED",
+    "verified_at": "2026-01-15T08:00:00Z",
+    "verified_by": "State Emergency Medical Services Authority",
+    "time_zone": "America/Los_Angeles",
+    "departments": [
+      { "id": "dep_ed", "name": "Emergency Department", "is_emergency_service": true },
+      { "id": "dep_trauma", "name": "Trauma Resuscitation Center", "is_emergency_service": true },
+      { "id": "dep_cath", "name": "Cardiac Cath Lab Suite", "is_emergency_service": true },
+      { "id": "dep_stroke", "name": "Comprehensive Stroke Center", "is_emergency_service": true },
+      { "id": "dep_picu", "name": "Pediatric Intensive Care Unit", "is_emergency_service": true },
+      { "id": "dep_burn", "name": "Burn Triage Unit", "is_emergency_service": false }
+    ],
+    "created_at": "2026-01-01T00:00:00Z",
+    "updated_at": "2026-10-08T01:30:00Z"
+  },
+  {
+    "id": "hosp_mercy_02",
+    "name": "Mercy General Hospital & Heart Center",
+    "trauma_level": "LEVEL_2",
+    "relay_code": "MGH-HEART-02",
+    "address": {
+      "street": "1200 Mercy Way",
+      "city": "Metro City",
+      "region": "State Central",
+      "postal_code": "90214",
+      "country": "US"
+    },
+    "phone": "+1 (555) 911-6200",
+    "email": "er.dispatch@mercygeneral.org",
+    "location": {
+      "latitude": 37.7833,
+      "longitude": -122.4167
+    },
+    "emergency_department_24_7": true,
+    "verification_status": "APPROVED",
+    "verified_at": "2026-02-01T10:00:00Z",
+    "verified_by": "State Emergency Medical Services Authority",
+    "time_zone": "America/Los_Angeles",
+    "created_at": "2026-01-10T00:00:00Z",
+    "updated_at": "2026-10-08T01:00:00Z"
+  }
+]

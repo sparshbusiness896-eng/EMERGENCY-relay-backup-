@@ -1,0 +1,47 @@
+[
+  {
+    "id": "usr_paramedic_1",
+    "email": "paramedic@108triage.org",
+    "fullName": "Vikram Singh (Lead EMT-P)",
+    "role": "PARAMEDIC",
+    "ambulanceId": "amb_108_014",
+    "hospitalId": null,
+    "isActive": true
+  },
+  {
+    "id": "usr_er_1",
+    "email": "er.doctor@apex.org",
+    "fullName": "Dr. Sunita Rao (ER In-Charge)",
+    "role": "ER_STAFF",
+    "ambulanceId": null,
+    "hospitalId": "hos_001",
+    "isActive": true
+  },
+  {
+    "id": "usr_admin_1",
+    "email": "admin@apex.org",
+    "fullName": "Rajesh Sharma (Hospital Administrator)",
+    "role": "HOSPITAL_ADMIN",
+    "ambulanceId": null,
+    "hospitalId": "hos_001",
+    "isActive": true
+  },
+  {
+    "id": "usr_dispatcher_1",
+    "email": "dispatch@108control.org",
+    "fullName": "Anita Mehra (Lead 108 Dispatcher)",
+    "role": "DISPATCHER",
+    "ambulanceId": null,
+    "hospitalId": null,
+    "isActive": true
+  },
+  {
+    "id": "usr_sysadmin_1",
+    "email": "sysadmin@triagerelay.org",
+    "fullName": "Dev Team System Admin",
+    "role": "SYSTEM_ADMIN",
+    "ambulanceId": null,
+    "hospitalId": null,
+    "isActive": true
+  }
+]

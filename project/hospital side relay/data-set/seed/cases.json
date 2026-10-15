@@ -1,0 +1,383 @@
+[
+  {
+    "case_id": "case_7f3a91c2",
+    "idempotency_key": "case_7f3a91c2-submit-1",
+    "version": 1,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-08T02:00:15Z",
+    "received_at": "2026-10-08T02:00:17Z",
+    "priority": "CRITICAL",
+    "emergency_type": "Road Traffic Collision (Multi-Trauma)",
+    "patient_condition_summary": "Adult male (approx. 38y), conscious but deteriorating, flail chest, suspected pelvic fracture",
+    "patient": {
+      "age": 38,
+      "age_group": "ADULT",
+      "sex": "male",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 134, "unit": "bpm", "measured_at": "2026-10-08T02:01:00Z" },
+      { "type": "blood_pressure", "value": "84/48", "unit": "mmHg", "measured_at": "2026-10-08T02:01:00Z" },
+      { "type": "oxygen_saturation", "value": 89, "unit": "%", "measured_at": "2026-10-08T02:01:00Z" },
+      { "type": "respiratory_rate", "value": 28, "unit": "breaths/min", "measured_at": "2026-10-08T02:01:00Z" },
+      { "type": "glasgow_coma_scale", "value": "11 (E3 V3 M5)", "unit": "points", "measured_at": "2026-10-08T02:01:00Z" }
+    ],
+    "notes": "High-speed rollover on Highway 101 North. Driver extricated with hydraulic cutters. Severe thoracic pain, paradoxical chest movement right side, pelvic binder placed in field. Peripheral IV line 16G right antecubital with normal saline bolus running.",
+    "treatment_given": "High-flow O2 via non-rebreather, 1L Saline bolus, Pelvic binder secured, Cervical collar applied, Tranexamic Acid (TXA 1g) infused",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-14",
+      "name_or_code": "Paramedic Capt. A. Ramos",
+      "callback_phone": "+1 (555) 911-8814"
+    },
+    "eta": "2026-10-08T02:14:00Z",
+    "eta_minutes_initial": 14,
+    "delivery_state": "DELIVERED",
+    "response_status": "NEW",
+    "acknowledged_by": null,
+    "resources_requested": [
+      { "type": "TRAUMA_TEAM", "detail": "Level 1 Trauma Surgical Team", "status": "PENDING" },
+      { "type": "BLOOD_PRODUCT", "detail": "Massive Transfusion Protocol (4U O-Neg, 4U FFP)", "status": "REQUESTED" },
+      { "type": "OPERATING_THEATER", "detail": "Trauma OR Bay 1", "status": "PENDING" }
+    ],
+    "instructions_to_paramedic": null,
+    "unable_to_receive_reason": null,
+    "timeline": [
+      {
+        "timestamp": "2026-10-08T02:00:15Z",
+        "actor": "Paramedic Unit MEDIC-14",
+        "action": "CASE_SUBMITTED",
+        "detail": "Case dispatched from Highway 101 North Milepost 28"
+      },
+      {
+        "timestamp": "2026-10-08T02:00:17Z",
+        "actor": "System Relay",
+        "action": "SERVER_ACKNOWLEDGED",
+        "detail": "Relay delivered to St. Jude Trauma Portal (idempotency verified)"
+      }
+    ]
+  },
+  {
+    "case_id": "case_8b21c490",
+    "idempotency_key": "case_8b21c490-submit-1",
+    "version": 2,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-08T01:54:10Z",
+    "received_at": "2026-10-08T01:54:12Z",
+    "priority": "CRITICAL",
+    "emergency_type": "Acute STEMI (Cardiovascular)",
+    "patient_condition_summary": "Adult female (61y), crushing substernal chest pressure, diaphoresis, ST-elevation leads V1-V4",
+    "patient": {
+      "age": 61,
+      "age_group": "ADULT",
+      "sex": "female",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 102, "unit": "bpm", "measured_at": "2026-10-08T01:55:00Z" },
+      { "type": "blood_pressure", "value": "154/96", "unit": "mmHg", "measured_at": "2026-10-08T01:55:00Z" },
+      { "type": "oxygen_saturation", "value": 96, "unit": "%", "measured_at": "2026-10-08T01:55:00Z" },
+      { "type": "respiratory_rate", "value": 22, "unit": "breaths/min", "measured_at": "2026-10-08T01:55:00Z" }
+    ],
+    "notes": "Symptom onset 40 mins prior to 911 call. 12-lead ECG demonstrates 4mm ST elevations in V2-V4. Aspirin chewed. Nitroglycerin 0.4mg SL given with mild relief. Direct transport requested.",
+    "treatment_given": "Aspirin 324mg PO chewed, Nitro 0.4mg SL x1, Heparin 5000U IV bolus",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-07",
+      "name_or_code": "Paramedic S. O'Connor",
+      "callback_phone": "+1 (555) 911-8807"
+    },
+    "eta": "2026-10-08T02:18:00Z",
+    "eta_minutes_initial": 24,
+    "delivery_state": "DELIVERED",
+    "response_status": "RECEIVED",
+    "acknowledged_by": {
+      "user_id": "usr_marcus_vance",
+      "user_name": "Marcus Vance, BSN, RN",
+      "role": "EMERGENCY_STAFF",
+      "acknowledged_at": "2026-10-08T01:55:30Z"
+    },
+    "resources_requested": [
+      { "type": "SPECIALIST", "detail": "Interventional Cardiology Fellow on duty", "status": "CONFIRMED" },
+      { "type": "OPERATING_THEATER", "detail": "Cardiac Cath Lab Suite 2", "status": "PREPARING" }
+    ],
+    "instructions_to_paramedic": "Cath Lab Suite 2 is pre-alerted. Bring patient directly to ED resuscitation bay for immediate interventional handover.",
+    "unable_to_receive_reason": null,
+    "timeline": [
+      {
+        "timestamp": "2026-10-08T01:54:10Z",
+        "actor": "Paramedic Unit MEDIC-07",
+        "action": "CASE_SUBMITTED",
+        "detail": "12-lead ECG confirmed STEMI anterior wall"
+      },
+      {
+        "timestamp": "2026-10-08T01:54:12Z",
+        "actor": "System Relay",
+        "action": "SERVER_ACKNOWLEDGED",
+        "detail": "Stored and alerted ED dashboard"
+      },
+      {
+        "timestamp": "2026-10-08T01:55:30Z",
+        "actor": "Marcus Vance, BSN, RN",
+        "action": "STATUS_CHANGED",
+        "detail": "Acknowledged alert (RECEIVED). Cath team activated."
+      }
+    ]
+  },
+  {
+    "case_id": "case_9a44e217",
+    "idempotency_key": "case_9a44e217-submit-1",
+    "version": 1,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-08T01:48:00Z",
+    "received_at": "2026-10-08T01:48:02Z",
+    "priority": "HIGH",
+    "emergency_type": "Acute Ischemic Stroke (LVO Suspected)",
+    "patient_condition_summary": "Adult male (69y), sudden onset right-sided hemiplegia and expressive aphasia, last known normal 55m ago",
+    "patient": {
+      "age": 69,
+      "age_group": "ADULT",
+      "sex": "male",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 88, "unit": "bpm", "measured_at": "2026-10-08T01:49:00Z" },
+      { "type": "blood_pressure", "value": "178/104", "unit": "mmHg", "measured_at": "2026-10-08T01:49:00Z" },
+      { "type": "oxygen_saturation", "value": 98, "unit": "%", "measured_at": "2026-10-08T01:49:00Z" },
+      { "type": "respiratory_rate", "value": 16, "unit": "breaths/min", "measured_at": "2026-10-08T01:49:00Z" },
+      { "type": "blood_glucose", "value": 112, "unit": "mg/dL", "measured_at": "2026-10-08T01:49:00Z" }
+    ],
+    "notes": "Cincinnati Prehospital Stroke Scale score 3/3 (arm drift, facial droop, abnormal speech). Last known normal confirmed by spouse at 00:55 UTC. Blood glucose checked and normal (rules out hypoglycemia).",
+    "treatment_given": "Oxygen by cannula 2L, IV access 18G left forearm, Head elevated 30 degrees",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-03",
+      "name_or_code": "Paramedic J. Kowalski",
+      "callback_phone": "+1 (555) 911-8803"
+    },
+    "eta": "2026-10-08T02:22:00Z",
+    "eta_minutes_initial": 34,
+    "delivery_state": "DELIVERED",
+    "response_status": "PREPARING",
+    "acknowledged_by": {
+      "user_id": "usr_sarah_chen",
+      "user_name": "Dr. Sarah Chen, MD",
+      "role": "ADMIN",
+      "acknowledged_at": "2026-10-08T01:50:10Z"
+    },
+    "resources_requested": [
+      { "type": "SPECIALIST", "detail": "Stroke Neurologist on call", "status": "NOTIFIED" },
+      { "type": "EQUIPMENT", "detail": "CT Scanner 1 cleared for non-contrast brain CT", "status": "RESERVED" }
+    ],
+    "instructions_to_paramedic": "Proceed directly to CT Scanner 1. Stroke team will meet you at the scanner bed.",
+    "unable_to_receive_reason": null,
+    "timeline": [
+      {
+        "timestamp": "2026-10-08T01:48:00Z",
+        "actor": "Paramedic Unit MEDIC-03",
+        "action": "CASE_SUBMITTED",
+        "detail": "Code Stroke alerted from suburban residence"
+      },
+      {
+        "timestamp": "2026-10-08T01:50:10Z",
+        "actor": "Dr. Sarah Chen, MD",
+        "action": "STATUS_CHANGED",
+        "detail": "Alert acknowledged and status moved to PREPARING"
+      }
+    ]
+  },
+  {
+    "case_id": "case_3d11b882",
+    "idempotency_key": "case_3d11b882-submit-1",
+    "version": 1,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-08T01:38:00Z",
+    "received_at": "2026-10-08T01:38:02Z",
+    "priority": "MEDIUM",
+    "emergency_type": "Pediatric Severe Asthma (Bronchospasm)",
+    "patient_condition_summary": "Child female (7y), severe respiratory distress, audible wheezing, subcostal retractions",
+    "patient": {
+      "age": 7,
+      "age_group": "CHILD",
+      "sex": "female",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 142, "unit": "bpm", "measured_at": "2026-10-08T01:40:00Z" },
+      { "type": "blood_pressure", "value": "100/64", "unit": "mmHg", "measured_at": "2026-10-08T01:40:00Z" },
+      { "type": "oxygen_saturation", "value": 92, "unit": "%", "measured_at": "2026-10-08T01:40:00Z" },
+      { "type": "respiratory_rate", "value": 36, "unit": "breaths/min", "measured_at": "2026-10-08T01:40:00Z" }
+    ],
+    "notes": "History of reactive airway disease. Nebulizer started by parents without effect. Continuous albuterol/ipratropium nebulizer in transit with partial response.",
+    "treatment_given": "Albuterol 5mg + Ipratropium 0.5mg nebulized, Dexamethasone 12mg oral liquid",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-11",
+      "name_or_code": "Paramedic L. Gomez",
+      "callback_phone": "+1 (555) 911-8811"
+    },
+    "eta": "2026-10-08T02:28:00Z",
+    "eta_minutes_initial": 50,
+    "delivery_state": "DELIVERED",
+    "response_status": "READY",
+    "acknowledged_by": {
+      "user_id": "usr_marcus_vance",
+      "user_name": "Marcus Vance, BSN, RN",
+      "role": "EMERGENCY_STAFF",
+      "acknowledged_at": "2026-10-08T01:41:20Z"
+    },
+    "resources_requested": [
+      { "type": "SPECIALIST", "detail": "Pediatric Emergency Fellow", "status": "ASSIGNED" },
+      { "type": "EQUIPMENT", "detail": "Pediatric High-Flow Nasal Cannula", "status": "READY" }
+    ],
+    "instructions_to_paramedic": "Hospital reports ready to receive. Ambulance Bay 3 is cleared for pediatric intake.",
+    "unable_to_receive_reason": null,
+    "timeline": [
+      {
+        "timestamp": "2026-10-08T01:38:00Z",
+        "actor": "Paramedic Unit MEDIC-11",
+        "action": "CASE_SUBMITTED",
+        "detail": "Pediatric respiratory alert submitted"
+      },
+      {
+        "timestamp": "2026-10-08T01:41:20Z",
+        "actor": "Marcus Vance, BSN, RN",
+        "action": "STATUS_CHANGED",
+        "detail": "Status updated to PREPARING"
+      },
+      {
+        "timestamp": "2026-10-08T01:46:00Z",
+        "actor": "Marcus Vance, BSN, RN",
+        "action": "STATUS_CHANGED",
+        "detail": "Hospital reports ready to receive (READY)"
+      }
+    ]
+  },
+  {
+    "case_id": "case_5c709e41",
+    "idempotency_key": "case_5c709e41-submit-1",
+    "version": 1,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-08T01:58:30Z",
+    "received_at": "2026-10-08T01:58:32Z",
+    "priority": "LOW",
+    "emergency_type": "Orthopedic Closed Fracture (Right Ankle)",
+    "patient_condition_summary": "Adult male (24y), sports injury, gross ankle deformity, distal pulse intact and warm",
+    "patient": {
+      "age": 24,
+      "age_group": "ADULT",
+      "sex": "male",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 78, "unit": "bpm", "measured_at": "2026-10-08T01:59:00Z" },
+      { "type": "blood_pressure", "value": "124/78", "unit": "mmHg", "measured_at": "2026-10-08T01:59:00Z" },
+      { "type": "oxygen_saturation", "value": 99, "unit": "%", "measured_at": "2026-10-08T01:59:00Z" },
+      { "type": "respiratory_rate", "value": 14, "unit": "breaths/min", "measured_at": "2026-10-08T01:59:00Z" }
+    ],
+    "notes": "Basketball court trauma. Inversion injury. Neurovascular status intact distal to fracture. Splint applied in position of comfort.",
+    "treatment_given": "Pillow splint applied, Ice pack, Fentanyl 50mcg IV for analgesia",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-19",
+      "name_or_code": "Paramedic T. Wu",
+      "callback_phone": "+1 (555) 911-8819"
+    },
+    "eta": "2026-10-08T02:35:00Z",
+    "eta_minutes_initial": 36,
+    "delivery_state": "DELIVERED",
+    "response_status": "NEW",
+    "acknowledged_by": null,
+    "resources_requested": [],
+    "instructions_to_paramedic": null,
+    "unable_to_receive_reason": null,
+    "timeline": [
+      {
+        "timestamp": "2026-10-08T01:58:30Z",
+        "actor": "Paramedic Unit MEDIC-19",
+        "action": "CASE_SUBMITTED",
+        "detail": "Case submitted to portal"
+      }
+    ]
+  },
+  {
+    "case_id": "case_1e82a399",
+    "idempotency_key": "case_1e82a399-submit-1",
+    "version": 3,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-07T22:15:00Z",
+    "received_at": "2026-10-07T22:15:03Z",
+    "priority": "HIGH",
+    "emergency_type": "Severe Allergic Reaction (Anaphylaxis)",
+    "patient_condition_summary": "Adult female (32y), generalized urticaria, tongue swelling after peanut exposure",
+    "patient": {
+      "age": 32,
+      "age_group": "ADULT",
+      "sex": "female",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 96, "unit": "bpm", "measured_at": "2026-10-07T22:30:00Z" },
+      { "type": "blood_pressure", "value": "116/74", "unit": "mmHg", "measured_at": "2026-10-07T22:30:00Z" },
+      { "type": "oxygen_saturation", "value": 98, "unit": "%", "measured_at": "2026-10-07T22:30:00Z" }
+    ],
+    "notes": "IM Epinephrine x2 administered prior to hospital arrival. Airway stable upon ED bay intake.",
+    "treatment_given": "Epi-Pen 0.3mg IM x2, Diphenhydramine 50mg IV, Methylprednisolone 125mg IV",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-02",
+      "name_or_code": "Paramedic D. Kelly",
+      "callback_phone": "+1 (555) 911-8802"
+    },
+    "eta": "2026-10-07T22:35:00Z",
+    "delivery_state": "DELIVERED",
+    "response_status": "HANDOVER_COMPLETE",
+    "closed_at": "2026-10-07T23:10:00Z",
+    "acknowledged_by": {
+      "user_id": "usr_marcus_vance",
+      "user_name": "Marcus Vance, BSN, RN",
+      "role": "EMERGENCY_STAFF",
+      "acknowledged_at": "2026-10-07T22:16:00Z"
+    },
+    "timeline": [
+      { "timestamp": "2026-10-07T22:15:00Z", "actor": "Paramedic Unit MEDIC-02", "action": "CASE_SUBMITTED", "detail": "Anaphylaxis transport" },
+      { "timestamp": "2026-10-07T22:16:00Z", "actor": "Marcus Vance", "action": "STATUS_CHANGED", "detail": "RECEIVED" },
+      { "timestamp": "2026-10-07T22:35:00Z", "actor": "Marcus Vance", "action": "STATUS_CHANGED", "detail": "PATIENT_ARRIVED" },
+      { "timestamp": "2026-10-07T23:10:00Z", "actor": "Marcus Vance", "action": "STATUS_CHANGED", "detail": "HANDOVER_COMPLETE - Patient stabilized in ED Observation" }
+    ]
+  },
+  {
+    "case_id": "case_4f61b203",
+    "idempotency_key": "case_4f61b203-submit-1",
+    "version": 1,
+    "hospital_id": "hosp_metro_01",
+    "submitted_at": "2026-10-07T20:20:00Z",
+    "received_at": "2026-10-07T20:20:02Z",
+    "priority": "CRITICAL",
+    "emergency_type": "Extensive Thermal Burns (55% TBSA)",
+    "patient_condition_summary": "Adult male (45y), deep partial and full thickness burns following industrial explosion",
+    "patient": {
+      "age": 45,
+      "age_group": "ADULT",
+      "sex": "male",
+      "identifier": null
+    },
+    "vital_signs": [
+      { "type": "heart_rate", "value": 128, "unit": "bpm", "measured_at": "2026-10-07T20:21:00Z" },
+      { "type": "blood_pressure", "value": "104/62", "unit": "mmHg", "measured_at": "2026-10-07T20:21:00Z" }
+    ],
+    "notes": "Industrial solvent explosion. Severe inhalation injury suspected. Parkland formula resuscitation initiated.",
+    "treatment_given": "Endotracheal intubation on scene, Lactated Ringers 1000mL/hr, Dry sterile dressings",
+    "paramedic": {
+      "unit_id": "MEDIC-UNIT-08",
+      "name_or_code": "Paramedic R. Fletcher",
+      "callback_phone": "+1 (555) 911-8808"
+    },
+    "eta": "2026-10-07T20:42:00Z",
+    "delivery_state": "DELIVERED",
+    "response_status": "UNABLE_TO_RECEIVE",
+    "closed_at": "2026-10-07T20:24:00Z",
+    "unable_to_receive_reason": {
+      "reason_code": "RESOURCE_UNAVAILABLE",
+      "reason_note": "Specialized Burn Intensive Care Unit at 100% capacity. Paramedic instructed to redirect immediately to Regional Burn Institute (8 miles east)."
+    },
+    "timeline": [
+      { "timestamp": "2026-10-07T20:20:00Z", "actor": "Paramedic Unit MEDIC-08", "action": "CASE_SUBMITTED", "detail": "Burn alert submitted" },
+      { "timestamp": "2026-10-07T20:24:00Z", "actor": "Dr. Sarah Chen, MD", "action": "STATUS_CHANGED", "detail": "UNABLE_TO_RECEIVE: Dedicated Burn ICU beds occupied. Direct divert authorized." }
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "id": "cap_snap_20261008_01",
+  "hospital_id": "hosp_metro_01",
+  "total_beds": 120,
+  "available_beds": 18,
+  "occupied_beds": 102,
+  "icu_beds_total": 20,
+  "icu_beds_vacant": 4,
+  "operating_theaters_total": 6,
+  "operating_theaters_available": 2,
+  "trauma_bays_total": 4,
+  "trauma_bays_available": 1,
+  "recorded_at": "2026-10-08T01:45:00Z",
+  "recorded_by_user_id": "usr_elena_rostova",
+  "recorded_by_name": "Elena Rostova (Capacity Coordinator)",
+  "confirmed_without_change": false,
+  "freshness_threshold_minutes": 30,
+  "by_department": [
+    { "department_id": "dep_ed", "name": "Emergency Department", "total": 35, "available": 5, "occupied": 30 },
+    { "department_id": "dep_trauma", "name": "Trauma Resuscitation Bays", "total": 4, "available": 1, "occupied": 3 },
+    { "department_id": "dep_icu", "name": "Adult Intensive Care Unit", "total": 20, "available": 4, "occupied": 16 },
+    { "department_id": "dep_stepdown", "name": "Cardiac Step-down Unit", "total": 25, "available": 3, "occupied": 22 },
+    { "department_id": "dep_medsurg", "name": "General Acute Med/Surg", "total": 36, "available": 5, "occupied": 31 }
+  ],
+  "disclaimer": "Figures are not a guarantee of acceptance. Capacity data supports pre-hospital coordination only."
+}

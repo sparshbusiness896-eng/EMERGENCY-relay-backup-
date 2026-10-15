@@ -1,0 +1,18 @@
+{
+  "name": "hospital-side-relay",
+  "version": "1.0.0",
+  "description": "Hospital Emergency Coordination Portal & Paramedic Relay",
+  "scripts": {
+    "start": "npm start --prefix backend",
+    "dev": "npm start --prefix backend",
+    "test": "node -e \"console.log('Validating dataset schemas...'); require('./data-set/index.js'); console.log('Dataset schemas and seed fixtures verified successfully.');\" && npm test --prefix backend"
+  },
+  "keywords": [
+    "hospital",
+    "emergency-relay",
+    "paramedic-dispatch",
+    "healthcare-portal"
+  ],
+  "author": "Emergency Healthcare Engineering Team",
+  "license": "ISC"
+}
